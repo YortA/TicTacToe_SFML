@@ -17,7 +17,7 @@ Clock::~Clock()
 // Getters
 float Clock::getMicroseconds()
 {
-	return (float)clock->getElapsedTime().asMicroseconds();
+	return (float)clock->getElapsedTime().asMicroseconds();			// we need to cast our object to a float so we can get a float value back
 }
 
 float Clock::getMilliseconds()

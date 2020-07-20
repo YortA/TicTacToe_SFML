@@ -146,17 +146,24 @@
   <ItemGroup>
     <ClCompile Include="Clock.cpp" />
     <ClCompile Include="DeltaTime.cpp" />
+    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="WindowParams.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Clock.h" />
     <ClInclude Include="DeltaTime.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="StateManager.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="WindowParams.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Graphics\Background_Board.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

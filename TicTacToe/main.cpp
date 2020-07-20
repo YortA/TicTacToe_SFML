@@ -5,11 +5,11 @@
 
 int main()
 {
-	Game TestWindow("Test Window", SCREEN_WIDTH, SCREEN_HEIGHT, false);
+	Game TicTacToe("TicTacToe - A (not so) Fun Game!", SCREEN_WIDTH, SCREEN_HEIGHT, false);
 
-	while (TestWindow.isRunning())
+	while (TicTacToe.isRunning())
 	{
-		TestWindow.update();
-		TestWindow.render();
+		TicTacToe.update();
+		TicTacToe.render();
 	}
 }

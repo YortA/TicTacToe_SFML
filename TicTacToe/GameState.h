@@ -9,6 +9,8 @@ private:
 	class Window* window = nullptr;
 	class DeltaTime* deltatime = nullptr;
 
+	class Entity* background = nullptr;
+
 	// Rendering functions
 	void clear();
 	void draw();

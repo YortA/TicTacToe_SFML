@@ -2,6 +2,7 @@
 #include "Window.h"
 #include "WindowParams.h"
 #include "DeltaTime.h"
+#include "Entity.h"
 
 Game::Game(const char* id, int width, int height, bool fullscreen)
 {
@@ -26,12 +27,16 @@ void Game::create(const char* id, int width, int height, bool fullscreen)
 {
 	window = new Window(id, width, height, fullscreen);
 	deltatime = new DeltaTime;
+
+	// Let's create our first entity
+	background = new Entity("Graphics/Background_Board.png");
 }
 
 void Game::destroy()
 {
 	delete window;
 	delete deltatime;
+	delete background;
 }
 
 
@@ -67,10 +72,12 @@ void Game::clear()
 	window->clear();	// call our window clear
 }
 
-// TO BE COMPLETED (RENDER OBJECTS LATER)
+// Render our entities on-screen
 void Game::draw()
 {
-	// banana
+	// Background
+	background->setPosition(400, 300);
+	window->draw(*background->getRect());
 }
 
 void Game::display()
