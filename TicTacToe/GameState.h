@@ -8,7 +8,11 @@ private:
 	// Pointer classes to render our window
 	class Window* window = nullptr;
 	class DeltaTime* deltatime = nullptr;
+	class StateManager* statemanager = nullptr;
+	class InputManager* inputmanager = nullptr;
+	class State* state = nullptr;
 
+	// Initialize entities
 	class Entity* background = nullptr;
 
 	// Rendering functions
@@ -19,9 +23,11 @@ private:
 	// Rendering "heartbeat" updates
 	void updateDelta();
 	void updateEvent();
-	//void updateInput();
+	void updateInput();
 
-	// Add other functions later
+	// Game Functionality
+	int boardArray[3][3];		// MD array for our board spots
+
 
 public:
 	// Constructor/Destructors

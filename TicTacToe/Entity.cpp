@@ -53,9 +53,14 @@ sf::Vector2f Entity::getOrigin()
 	return rect->getOrigin();
 }
 
+// getters for our non-SFML
+float Entity::getOpacity()
+{
+	return rect->getFillColor().a;
+}
 
-//
-// setters for our SFML (to be used later)
+
+// Setters
 void Entity::setTexture(sf::Texture* texture)
 {
 	this->texture = texture;
@@ -73,4 +78,13 @@ void Entity::setPosition(float x, float y)
 void Entity::setOrigin(float x, float y)
 {
 	rect->setOrigin(sf::Vector2f(x, y));
+}
+
+void Entity::setOpacity(float x)
+{
+	rect->setFillColor(sf::Color(			// pass our alpha value
+		rect->getFillColor().r,
+		rect->getFillColor().g,
+		rect->getFillColor().b,
+		x));
 }

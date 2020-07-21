@@ -22,8 +22,13 @@ public:
 	sf::Vector2f getPosition();			// where we want to position the entity inside the axis
 	sf::Vector2f getOrigin();			// Where the origin is in relation to the draw axis
 
+	// Non-SFML getters
+	float getOpacity();
+
+	// Non-SFML setters
 	void setTexture(sf::Texture* texture);
 	void setRect(sf::RectangleShape* rect);
 	void setPosition(float x, float y);
 	void setOrigin(float x, float y);
+	void setOpacity(float x);
 };

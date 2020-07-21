@@ -1,5 +1,6 @@
 #pragma once
-#include "SFML/Graphics.hpp"
+#include "State.h"
+#include "SFML/Graphics.hpp"	// i don't think we need this here.
 
 class StateManager
 {
@@ -10,13 +11,13 @@ private:
 	// Grab SFML functions to post to screen
 	//sf::Sprite
 
-	enum class STATE
-	{
-		START,		// start == 0
-		PLAYING,
-		GAMEOVER
-	};
+	
 
 public:
-	STATE state;
+	StateManager();
+	StateManager(State::GAME_STATE gameState);
+	~StateManager();
+
+	class State* state;
+
 };

@@ -1,3 +1,10 @@
+// Troy Andrews
+// SDEV-240-81
+// 7/18/2020
+// TicTacToe using SFML
+
+// Refernces for setting up SFML Game Development by Example (eBook)
+
 #include "GameState.h"
 
 #define SCREEN_WIDTH 800
