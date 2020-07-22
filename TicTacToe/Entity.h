@@ -6,6 +6,8 @@ class Entity
 {
 private:
 	void create(std::string texture);		// pass a string to find our texture
+	void create(std::string texture, class Window* window);
+	void create(std::string texture, float x, float y);
 	void destroy();
 
 	// SFML specific classes
@@ -14,6 +16,7 @@ private:
 	
 public:
 	Entity(std::string texture);
+	Entity(std::string texture, float x, float y);
 	~Entity();
 
 	// SFML member functions

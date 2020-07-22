@@ -1,5 +1,5 @@
 #pragma once
-
+#include <vector>
 // Our main game class that controls all functionality
 
 class Game
@@ -14,7 +14,7 @@ private:
 
 	// Initialize entities
 	class Entity* background = nullptr;
-
+	class Entity* gridbg = nullptr;
 	// Rendering functions
 	void clear();
 	void draw();
@@ -26,8 +26,13 @@ private:
 	void updateInput();
 
 	// Game Functionality
-	int boardArray[3][3];		// MD array for our board spots
+	int boardArray[3][3];							// MD array for our board spots
+	std::vector<std::vector<Entity*>> markerVec;	// MD vector hurrr
 
+	//class Entity* markerArray[3][3];				// Not in-use
+
+	//int playerTurn;
+	//int currentState;
 
 public:
 	// Constructor/Destructors

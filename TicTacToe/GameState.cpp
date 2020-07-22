@@ -35,11 +35,13 @@ void Game::create(const char* id, int width, int height, bool fullscreen)
 	deltatime = new DeltaTime;
 	statemanager = new StateManager(State::GAME_STATE::PLAYER);				// we could use our default, but for now we'll be implicit
 	inputmanager = new InputManager;
-	state = new State;
 
-	// Let's create our first entity
+	// Game Entitys
 	background = new Entity("Graphics/Background_Board.png");
-
+	gridbg = new Entity("Graphics/Grid.png");
+	// MAKE ENTITY CONSTRUCTOR FOR GRIDBG LATER HAHA
+	gridbg->setOrigin(0.f, 0.f);
+	gridbg->setPosition(200, 25);
 	// Game functionality
 
 	// Clear our board for marker inputs (x's and o's)
@@ -50,6 +52,26 @@ void Game::create(const char* id, int width, int height, bool fullscreen)
 			boardArray[i][j] = NO_MARKER;
 		}
 	}
+
+	// Create our marker entities for placement
+	for (int i = 0; i < 3; i++)
+	{
+		std::vector<Entity*> entityRow;
+		markerVec.push_back(entityRow);
+
+		for (int j = 0; j < 3; j++)
+		{
+			Entity* entity = new Entity("Graphics/x_marker.png", gridbg->getRect()->getSize().x, gridbg->getRect()->getSize().y);
+			markerVec[i].push_back(entity);
+
+			
+			markerVec[i][j]->setOrigin(0.f, 0.f);
+			// Set our marker position based off of our grid rect origin
+			markerVec[i][j]->setPosition(
+								(((gridbg->getRect()->getSize().x) / 3) * j) + gridbg->getPosition().x,
+								(((gridbg->getRect()->getSize().y) / 3) * i) + gridbg->getPosition().y);
+		}
+	}
 }
 
 void Game::destroy()
@@ -57,6 +79,14 @@ void Game::destroy()
 	delete window;
 	delete deltatime;
 	delete background;
+
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			delete markerVec[i][j];
+		}
+	}
 }
 
 
@@ -77,7 +107,7 @@ void Game::render()
 
 void Game::updateInput()
 {
-	inputmanager->update(background, state);			// statemanager->state->gameState
+	inputmanager->update(background, statemanager, window);			// statemanager->state->gameState
 }
 
 // Update functions
@@ -105,6 +135,20 @@ void Game::draw()
 	background->setPosition(400, 300);
 	//background->setOpacity(5); testiing our alpha channel
 	window->draw(*background->getRect());
+
+	window->draw(*gridbg->getRect());
+
+
+
+	// Grid
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			window->draw(*markerVec[i][j]->getRect());
+		}
+	}
+
 }
 
 void Game::display()

@@ -1,10 +1,16 @@
 #include "Entity.h"
+#include "Window.h"
 #include "SFML/System/Vector2.hpp"
 
 
 Entity::Entity(std::string texture)
 {
 	create(texture);
+}
+
+Entity::Entity(std::string texture, float x, float y)
+{
+	create(texture, x, y);
 }
 
 Entity::~Entity()
@@ -22,6 +28,16 @@ void Entity::create(std::string texture)
 
 	this->texture->loadFromFile(texture);	// pass our argument to load a specific texture
 	rect = new sf::RectangleShape(sf::Vector2f((float)this->texture->getSize().x, (float)this->texture->getSize().y));
+	rect->setTexture(this->texture);
+	rect->setOrigin(sf::Vector2f(this->texture->getSize().x / 2.0f, this->texture->getSize().y / 2.0f));
+}
+
+void Entity::create(std::string texture, float x, float y)			// use this to stretch window size
+{
+	this->texture = new sf::Texture;
+
+	this->texture->loadFromFile(texture);
+	rect = new sf::RectangleShape(sf::Vector2f(x / 3, y / 3));
 	rect->setTexture(this->texture);
 	rect->setOrigin(sf::Vector2f(this->texture->getSize().x / 2.0f, this->texture->getSize().y / 2.0f));
 }
