@@ -15,6 +15,7 @@ private:
 	// Initialize entities
 	class Entity* background = nullptr;
 	class Entity* gridbg = nullptr;
+
 	// Rendering functions
 	void clear();
 	void draw();
@@ -48,5 +49,6 @@ public:
 	void render();
 	bool isRunning();
 
-	// Add other functions later
+	// Entity creator function
+	void createEntities();
 };

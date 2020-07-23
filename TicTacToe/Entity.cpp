@@ -32,12 +32,13 @@ void Entity::create(std::string texture)
 	rect->setOrigin(sf::Vector2f(this->texture->getSize().x / 2.0f, this->texture->getSize().y / 2.0f));
 }
 
-void Entity::create(std::string texture, float x, float y)			// use this to stretch window size
+// use this to stretch sprite to texture size (i.e. marker on grid)
+void Entity::create(std::string texture, float x, float y)
 {
 	this->texture = new sf::Texture;
 
 	this->texture->loadFromFile(texture);
-	rect = new sf::RectangleShape(sf::Vector2f(x / 3, y / 3));
+	rect = new sf::RectangleShape(sf::Vector2f(x, y));
 	rect->setTexture(this->texture);
 	rect->setOrigin(sf::Vector2f(this->texture->getSize().x / 2.0f, this->texture->getSize().y / 2.0f));
 }

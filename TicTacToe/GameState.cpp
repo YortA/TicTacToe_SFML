@@ -29,6 +29,7 @@ Game::~Game()
 //
 //
 
+// Main game engine create
 void Game::create(const char* id, int width, int height, bool fullscreen)
 {
 	window = new Window(id, width, height, fullscreen);
@@ -36,14 +37,20 @@ void Game::create(const char* id, int width, int height, bool fullscreen)
 	statemanager = new StateManager(State::GAME_STATE::PLAYER);				// we could use our default, but for now we'll be implicit
 	inputmanager = new InputManager;
 
+	createEntities();
+}
+
+void Game::createEntities()
+{
 	// Game Entitys
 	background = new Entity("Graphics/Background_Board.png");
 	gridbg = new Entity("Graphics/Grid.png");
+
 	// MAKE ENTITY CONSTRUCTOR FOR GRIDBG LATER HAHA
 	gridbg->setOrigin(0.f, 0.f);
 	gridbg->setPosition(200, 25);
-	// Game functionality
 
+	// Game functionality
 	// Clear our board for marker inputs (x's and o's)
 	for (int i = 0; i < 3; i++)
 	{
@@ -61,24 +68,29 @@ void Game::create(const char* id, int width, int height, bool fullscreen)
 
 		for (int j = 0; j < 3; j++)
 		{
-			Entity* entity = new Entity("Graphics/x_marker.png", gridbg->getRect()->getSize().x, gridbg->getRect()->getSize().y);
+			Entity* entity = new Entity("Graphics/x_marker.png", gridbg->getRect()->getSize().x / 3, gridbg->getRect()->getSize().y / 3);
 			markerVec[i].push_back(entity);
 
-			
 			markerVec[i][j]->setOrigin(0.f, 0.f);
 			// Set our marker position based off of our grid rect origin
 			markerVec[i][j]->setPosition(
-								(((gridbg->getRect()->getSize().x) / 3) * j) + gridbg->getPosition().x,
-								(((gridbg->getRect()->getSize().y) / 3) * i) + gridbg->getPosition().y);
+			(((gridbg->getRect()->getSize().x) / 3) * j) + gridbg->getPosition().x,				// we get the gridbg position for the starting positions
+				(((gridbg->getRect()->getSize().y) / 3) * i) + gridbg->getPosition().y);		// and then add them. so; x = 0 + 250, 100 + 250 = 350, etc.
 		}
 	}
 }
 
 void Game::destroy()
 {
+	// delete game engine
 	delete window;
 	delete deltatime;
+	delete statemanager;
+	delete inputmanager;
+
+	// delete game entities
 	delete background;
+	delete gridbg;
 
 	for (int i = 0; i < 3; i++)
 	{

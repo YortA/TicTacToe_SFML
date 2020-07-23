@@ -1,5 +1,4 @@
 // Troy Andrews
-// SDEV-240-81
 // 7/18/2020
 // TicTacToe using SFML
 
@@ -12,7 +11,7 @@
 
 int main()
 {
-	Game TicTacToe("TicTacToe - A (not so) Fun Game!", SCREEN_WIDTH, SCREEN_HEIGHT, false);
+	Game TicTacToe{ "TicTacToe - A (not so) Fun Game!", SCREEN_WIDTH, SCREEN_HEIGHT, false };
 
 	while (TicTacToe.isRunning())
 	{
