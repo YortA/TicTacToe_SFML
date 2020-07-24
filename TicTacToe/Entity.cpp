@@ -8,9 +8,9 @@ Entity::Entity(std::string texture)
 	create(texture);
 }
 
-Entity::Entity(std::string texture, float x, float y)
+Entity::Entity(std::string texture, float width, float height)
 {
-	create(texture, x, y);
+	create(texture, width, height);
 }
 
 Entity::~Entity()
@@ -33,12 +33,12 @@ void Entity::create(std::string texture)
 }
 
 // use this to stretch sprite to texture size (i.e. marker on grid)
-void Entity::create(std::string texture, float x, float y)
+void Entity::create(std::string texture, float width, float height)
 {
 	this->texture = new sf::Texture;
 
 	this->texture->loadFromFile(texture);
-	rect = new sf::RectangleShape(sf::Vector2f(x, y));
+	rect = new sf::RectangleShape(sf::Vector2f(width, height));
 	rect->setTexture(this->texture);
 	rect->setOrigin(sf::Vector2f(this->texture->getSize().x / 2.0f, this->texture->getSize().y / 2.0f));
 }
@@ -74,6 +74,26 @@ sf::Vector2f Entity::getOrigin()
 float Entity::getOpacity()
 {
 	return rect->getFillColor().a;
+}
+
+unsigned int Entity::getLeft()
+{
+	return rect->getPosition().x + rect->getLocalBounds().left;				// 
+}
+
+unsigned int Entity::getWidth()
+{
+	return rect->getPosition().x + rect->getLocalBounds().width;
+}
+
+unsigned int Entity::getTop()
+{
+	return rect->getPosition().y + rect->getLocalBounds().top;
+}
+
+unsigned int Entity::getHeight()
+{
+	return rect->getPosition().y + rect->getLocalBounds().height;
 }
 
 

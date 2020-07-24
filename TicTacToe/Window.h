@@ -17,16 +17,19 @@ public:
 	void destroy();
 
 	void clear();
-	void draw(sf::Drawable& drawable);
+	void draw(sf::Drawable& drawable);		// allows us to draw in the window
 	void display();
 
-	bool isOpen();
+	bool isOpen();					// check to see if our window is open
 	bool isFullscreen();
 	//void toggleFullscreen();
 
+	// We don't 
+	unsigned int getWidth();
+	unsigned int getHeight();
+
 	// our event handler for inputs
 	void handleEvent();
-
 
 	sf::RenderWindow* getWindow();
 };

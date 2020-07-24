@@ -72,6 +72,7 @@ void Game::createEntities()
 			markerVec[i].push_back(entity);
 
 			markerVec[i][j]->setOrigin(0.f, 0.f);
+			markerVec[i][j]->setOpacity(0);													// let's just test our opacity on the "empty markers"
 			// Set our marker position based off of our grid rect origin
 			markerVec[i][j]->setPosition(
 			(((gridbg->getRect()->getSize().x) / 3) * j) + gridbg->getPosition().x,				// we get the gridbg position for the starting positions
@@ -120,6 +121,14 @@ void Game::render()
 void Game::updateInput()
 {
 	inputmanager->update(background, statemanager, window);			// statemanager->state->gameState
+
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			inputmanager->update(markerVec[i][j], statemanager, window);
+		}
+	}
 }
 
 // Update functions
@@ -156,7 +165,6 @@ void Game::draw()
 	{
 		for (int j = 0; j < 3; j++)
 		{
-			markerVec[i][j]->setOpacity(25);			// let's just test our opacity on the "empty markers"
 			window->draw(*markerVec[i][j]->getRect());
 		}
 	}

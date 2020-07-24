@@ -73,6 +73,15 @@ sf::RenderWindow* Window::getWindow()
 	return window;
 }
 
+unsigned int Window::getWidth()
+{
+	return window->getSize().x;
+}
+
+unsigned int Window::getHeight()
+{
+	return window->getSize().y;
+}
 //
 //
 //
