@@ -145,7 +145,6 @@ void Game::draw()
 {
 	// Background
 	background->setPosition(400, 300);
-	//background->setOpacity(5); testiing our alpha channel
 	window->draw(*background->getRect());
 
 	window->draw(*gridbg->getRect());
@@ -157,6 +156,7 @@ void Game::draw()
 	{
 		for (int j = 0; j < 3; j++)
 		{
+			markerVec[i][j]->setOpacity(25);			// let's just test our opacity on the "empty markers"
 			window->draw(*markerVec[i][j]->getRect());
 		}
 	}

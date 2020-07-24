@@ -1,5 +1,2 @@
-﻿  Entity.cpp
-C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Entity.cpp(106,3): warning C4244: 'argument': conversion from 'float' to 'sf::Uint8', possible loss of data
-  GameState.cpp
-  Generating Code...
+﻿  GameState.cpp
   TicTacToe.vcxproj -> C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\Debug\TicTacToe.exe

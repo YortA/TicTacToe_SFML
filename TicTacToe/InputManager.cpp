@@ -1,7 +1,7 @@
 #include "InputManager.h"
-#include "StateManager.h"
+#include "StateManager.h"					// so we can use statemanager methods
 #include "Entity.h"
-#include "SFML/Window/Mouse.hpp"
+#include "SFML/Window/Mouse.hpp"			// for sfml mouse functionality
 
 InputManager::InputManager()
 {
@@ -22,7 +22,7 @@ void InputManager::update(class Entity* entity, class StateManager* statemanager
 	{
 		if (statemanager->state->gameState == State::GAME_STATE::PLAYER)
 		{
-			entity->setOpacity(45.0);
+			//entity->setOpacity(45.0);
 		}
 	}
 }
