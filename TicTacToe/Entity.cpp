@@ -8,9 +8,9 @@ Entity::Entity(std::string texture)
 	create(texture);
 }
 
-Entity::Entity(std::string texture, float width, float height)
+Entity::Entity(std::string texture, float width, float height, int spriterows, int spritecolumns)
 {
-	create(texture, width, height);
+	create(texture, width, height, spriterows, spritecolumns);
 }
 
 Entity::~Entity()
@@ -33,13 +33,17 @@ void Entity::create(std::string texture)
 }
 
 // use this to stretch sprite to texture size (i.e. marker on grid)
-void Entity::create(std::string texture, float width, float height)
+void Entity::create(std::string texture, float width, float height, int spriterows, int spritecolumns)
 {
 	this->texture = new sf::Texture;
-
+	
 	this->texture->loadFromFile(texture);
 	rect = new sf::RectangleShape(sf::Vector2f(width, height));
 	rect->setTexture(this->texture);
+	
+	// addition for uvRect
+	rect->setTextureRect(sf::IntRect(0, 0, this->texture->getSize().x / spriterows, this->texture->getSize().y / spritecolumns));
+
 	rect->setOrigin(sf::Vector2f(this->texture->getSize().x / 2.0f, this->texture->getSize().y / 2.0f));
 }
 

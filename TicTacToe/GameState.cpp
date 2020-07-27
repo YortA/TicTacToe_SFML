@@ -32,7 +32,7 @@ Game::~Game()
 // Main game engine create
 void Game::create(const char* id, int width, int height, bool fullscreen)
 {
-	window = new Window(id, width, height, fullscreen);
+	window = new Window{ id, width, height, fullscreen };
 	deltatime = new DeltaTime;
 	statemanager = new StateManager(State::GAME_STATE::PLAYER);				// we could use our default, but for now we'll be implicit
 	inputmanager = new InputManager;
@@ -67,8 +67,9 @@ void Game::createEntities()
 		markerVec.push_back(entityRow);
 
 		for (int j = 0; j < 3; j++)
-		{
-			Entity* entity = new Entity("Graphics/x_marker.png", gridbg->getRect()->getSize().x / 3, gridbg->getRect()->getSize().y / 3);
+		{	
+			// 2 == SPRITErow; 1 == SPRITEcolumn
+			Entity* entity = new Entity("Graphics/XandO.png", gridbg->getRect()->getSize().x / 3, gridbg->getRect()->getSize().y / 3, 2, 1);
 			markerVec[i].push_back(entity);
 
 			markerVec[i][j]->setOrigin(0.f, 0.f);

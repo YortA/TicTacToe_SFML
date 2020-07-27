@@ -1,7 +1,2 @@
-﻿  InputManager.cpp
-C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\InputManager.cpp(26,61): warning C4018: '>': signed/unsigned mismatch
-C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\InputManager.cpp(27,61): warning C4018: '<': signed/unsigned mismatch
-C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\InputManager.cpp(28,61): warning C4018: '>': signed/unsigned mismatch
-C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\InputManager.cpp(29,61): warning C4018: '<': signed/unsigned mismatch
-C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\InputManager.cpp(31,44): warning C4390: ';': empty controlled statement found; is this the intent?
+﻿  GameState.cpp
   TicTacToe.vcxproj -> C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\Debug\TicTacToe.exe

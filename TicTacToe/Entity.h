@@ -7,7 +7,7 @@ class Entity
 private:
 	void create(std::string texture);		// pass a string to find our texture
 	//void create(std::string texture, class Window* window);
-	void create(std::string texture, float width, float height);
+	void create(std::string texture, float width, float height, int spriterows, int spritecolumns);
 	void destroy();
 
 	// SFML specific classes
@@ -16,7 +16,7 @@ private:
 	
 public:
 	Entity(std::string texture);
-	Entity(std::string texture, float width, float height);
+	Entity(std::string texture, float width, float height, int spriterows, int spritecolumns);		// spriterows/columns is for the sprite sheet
 	~Entity();
 
 	// SFML member functions
