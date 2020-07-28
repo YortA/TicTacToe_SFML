@@ -13,7 +13,10 @@ private:
 	// SFML specific classes
 	sf::Texture* texture = nullptr;
 	sf::RectangleShape* rect = nullptr;		// required so that Texture* texture can be set
-	
+	sf::Vector2i* gridPosition = nullptr;
+
+	char id;			// 'x', 'o', or '_'
+
 public:
 	Entity(std::string texture);
 	Entity(std::string texture, float width, float height, int spriterows, int spritecolumns);		// spriterows/columns is for the sprite sheet
@@ -24,12 +27,14 @@ public:
 	sf::RectangleShape* getRect();
 	sf::Vector2f getPosition();			// where we want to position the entity inside the axis
 	sf::Vector2f getOrigin();			// Where the origin is in relation to the draw axis
+	sf::Vector2i* getGridPosition();
 
 	// Get Bounds (unsigned because our variable can't be negative)
 	unsigned int getLeft();
 	unsigned int getWidth();
 	unsigned int getTop();
 	unsigned int getHeight();
+	char getId();
 
 
 	// Non-SFML getters
@@ -41,4 +46,7 @@ public:
 	void setPosition(float x, float y);
 	void setOrigin(float x, float y);
 	void setOpacity(float x);
+	void setGridPosition(int x, int y);
+	void setId(char id);
+
 };

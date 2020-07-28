@@ -1,25 +1,36 @@
 #pragma once
+#include <vector>
 
 class AI
 {
 private:
-	int x;
-	int y;
-
-	int humanMarker = 1;
-	int aiMarker = 2;
+	char humanMarker = 'X';
+	char aiMarker = 'O';
+	char emptyMarker = '_';
+	//int playerTurn;
 
 public:
+	AI();
+	~AI();
 
-	enum class PLAYER { HUMAN, AI };				// We use this enum to figure out whose turn it is
+	//enum class PLAYER { HUMAN, AI };				// We use this enum to figure out whose turn it is
+	struct Moves
+	{
+		int x;		// our rows
+		int y;		// our cols
+	};
 
-	bool isEmptySquare(int board[3][3]);
-	bool checkWin(PLAYER player, int board[3][3]);
-	bool gameOver(int board[3][3]);
+	Moves moves;
+
+	void switchFromXtoO(class Entity* entity);
+
+	bool isEmptySquare(std::vector<std::vector<class Entity*>> markerVec);
+	bool checkWin(class StateManager* statemanager, std::vector<std::vector<class Entity*>> markerVec);
+	bool gameOver(std::vector<std::vector<class Entity*>> markerVec);
 
 
-	int minimax(int board[3][3]);
-	int maxReturn(int board[3][3]);
-	int minReturn(int board[3][3]);
+	Moves minimax(std::vector<std::vector<class Entity*>> markerVec);
+	int maxReturn(std::vector<std::vector<class Entity*>> markerVec);
+	int minReturn(std::vector<std::vector<class Entity*>> markerVec);
 
 };

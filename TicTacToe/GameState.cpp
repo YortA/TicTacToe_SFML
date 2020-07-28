@@ -5,6 +5,7 @@
 #include "Entity.h"
 #include "StateManager.h"
 #include "InputManager.h"
+#include "AI.h"
 
 
 #define NO_MARKER -1		// our empty piece int
@@ -36,6 +37,7 @@ void Game::create(const char* id, int width, int height, bool fullscreen)
 	deltatime = new DeltaTime;
 	statemanager = new StateManager(State::GAME_STATE::PLAYER);				// we could use our default, but for now we'll be implicit
 	inputmanager = new InputManager;
+	ai = new AI;
 
 	createEntities();
 }
@@ -70,10 +72,12 @@ void Game::createEntities()
 		{	
 			// 2 == SPRITErow; 1 == SPRITEcolumn
 			Entity* entity = new Entity("Graphics/XandO.png", gridbg->getRect()->getSize().x / 3, gridbg->getRect()->getSize().y / 3, 2, 1);
+			entity->setId('_');																	// sets the grid to empty '_'
+			entity->setGridPosition(i, j);														// sets a [i][j] position relative to the grid (e.g. [0][0] - [2][2])
 			markerVec[i].push_back(entity);
 
 			markerVec[i][j]->setOrigin(0.f, 0.f);
-			markerVec[i][j]->setOpacity(0);													// let's just test our opacity on the "empty markers"
+			markerVec[i][j]->setOpacity(0);														// let's just test our opacity on the "empty markers"
 			// Set our marker position based off of our grid rect origin
 			markerVec[i][j]->setPosition(
 			(((gridbg->getRect()->getSize().x) / 3) * j) + gridbg->getPosition().x,				// we get the gridbg position for the starting positions
@@ -89,6 +93,7 @@ void Game::destroy()
 	delete deltatime;
 	delete statemanager;
 	delete inputmanager;
+	delete ai;
 
 	// delete game entities
 	delete background;
@@ -109,7 +114,8 @@ void Game::update()
 {
 	updateDelta();
 	updateEvent();
-	updateInput();
+	updateInput();		// player input
+	updateAI();			// ai input
 }
 
 void Game::render()
@@ -119,10 +125,12 @@ void Game::render()
 	display();
 }
 
+// Allows us to call our update functionality for mouse clicks on screen
 void Game::updateInput()
 {
-	inputmanager->update(background, statemanager, window);			// statemanager->state->gameState
+	//inputmanager->update(background, statemanager, window);			// what is this even for
 
+	// Iterate through all of the cells
 	for (int i = 0; i < 3; i++)
 	{
 		for (int j = 0; j < 3; j++)
@@ -132,7 +140,33 @@ void Game::updateInput()
 	}
 }
 
-// Update functions
+void Game::updateAI()
+{
+	ai->moves = ai->minimax(markerVec);
+
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			if ((ai->moves.x == markerVec[i][j]->getGridPosition()->x) &&
+				(ai->moves.y == markerVec[i][j]->getGridPosition()->y))
+			{
+				ai->switchFromXtoO(markerVec[i][j]);
+				markerVec[i][j]->setOpacity(255);
+				markerVec[i][j]->setId('O');
+			}
+		}
+	}
+}
+
+// notes
+// we can invoke the check if empty function in ai->checkifempty and pass our arrayBoard[][]?
+
+
+
+
+
+// Update our deltatime -- we will (maybe) use this to track time in-game
 void Game::updateDelta()
 {
 	deltatime->update();
@@ -172,6 +206,7 @@ void Game::draw()
 
 }
 
+// Display our window
 void Game::display()
 {
 	window->display();

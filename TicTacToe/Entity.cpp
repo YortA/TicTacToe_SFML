@@ -36,7 +36,8 @@ void Entity::create(std::string texture)
 void Entity::create(std::string texture, float width, float height, int spriterows, int spritecolumns)
 {
 	this->texture = new sf::Texture;
-	
+	gridPosition = new sf::Vector2i;  
+
 	this->texture->loadFromFile(texture);
 	rect = new sf::RectangleShape(sf::Vector2f(width, height));
 	rect->setTexture(this->texture);
@@ -74,6 +75,11 @@ sf::Vector2f Entity::getOrigin()
 	return rect->getOrigin();
 }
 
+sf::Vector2i* Entity::getGridPosition()
+{
+	return gridPosition;
+}
+
 // getters for our non-SFML
 float Entity::getOpacity()
 {
@@ -100,6 +106,10 @@ unsigned int Entity::getHeight()
 	return rect->getPosition().y + rect->getLocalBounds().height;
 }
 
+char Entity::getId()
+{
+	return id;
+}
 
 // Setters
 void Entity::setTexture(sf::Texture* texture)
@@ -128,4 +138,17 @@ void Entity::setOpacity(float x)
 		rect->getFillColor().g,
 		rect->getFillColor().b,
 		x));
+}
+
+// This will return our location in the grid for our entity [0][0] - [2][2]
+void Entity::setGridPosition(int x, int y)
+{
+	gridPosition->x = x;
+	gridPosition->y = y;
+}
+
+// Find our entity id (whether it's empty, x or o.)
+void Entity::setId(char id)
+{
+	this->id = id;
 }

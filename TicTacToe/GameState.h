@@ -11,6 +11,7 @@ private:
 	class StateManager* statemanager = nullptr;
 	class InputManager* inputmanager = nullptr;
 	class State* state = nullptr;
+	class AI* ai = nullptr;
 
 	// Initialize entities
 	class Entity* background = nullptr;
@@ -25,15 +26,14 @@ private:
 	void updateDelta();
 	void updateEvent();
 	void updateInput();
+	void updateAI();
+
 
 	// Game Functionality
 	int boardArray[3][3];							// MD array for our board spots
 	std::vector<std::vector<Entity*>> markerVec;	// MD vector hurrr
 
 	//class Entity* markerArray[3][3];				// Not in-use
-
-	//int playerTurn;
-	//int currentState;
 
 public:
 	// Constructor/Destructors

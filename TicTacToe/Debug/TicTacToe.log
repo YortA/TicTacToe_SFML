@@ -1,2 +1,33 @@
-﻿  GameState.cpp
+﻿  AI.cpp
+  Entity.cpp
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Entity.cpp(91,31): warning C4244: 'return': conversion from 'T' to 'unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Entity.cpp(96,31): warning C4244: 'return': conversion from 'T' to 'unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Entity.cpp(101,31): warning C4244: 'return': conversion from 'T' to 'unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Entity.cpp(106,31): warning C4244: 'return': conversion from 'T' to 'unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Entity.cpp(140,3): warning C4244: 'argument': conversion from 'float' to 'sf::Uint8', possible loss of data
+  GameState.cpp
+  InputManager.cpp
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\InputManager.cpp(26,61): warning C4018: '>': signed/unsigned mismatch
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\InputManager.cpp(27,61): warning C4018: '<': signed/unsigned mismatch
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\InputManager.cpp(28,61): warning C4018: '>': signed/unsigned mismatch
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\InputManager.cpp(29,61): warning C4018: '<': signed/unsigned mismatch
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\InputManager.cpp(31,44): warning C4390: ';': empty controlled statement found; is this the intent?
+  main.cpp
+  Generating Code...
   TicTacToe.vcxproj -> C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\Debug\TicTacToe.exe
