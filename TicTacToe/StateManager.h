@@ -6,9 +6,9 @@ class StateManager
 private:
 public:
 	StateManager();
-	StateManager(State::GAME_STATE gameState);
+	StateManager(GAME_STATE gameState);
 	~StateManager();
 
-	class State* state;
+	GAME_STATE* gameState;
 
 };

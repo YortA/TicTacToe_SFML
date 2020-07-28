@@ -7,6 +7,8 @@
 #include "InputManager.h"
 #include "AI.h"
 
+#include <iostream>
+
 
 #define NO_MARKER -1		// our empty piece int
 
@@ -35,7 +37,7 @@ void Game::create(const char* id, int width, int height, bool fullscreen)
 {
 	window = new Window{ id, width, height, fullscreen };
 	deltatime = new DeltaTime;
-	statemanager = new StateManager(State::GAME_STATE::PLAYER);				// we could use our default, but for now we'll be implicit
+	statemanager = new StateManager(GAME_STATE::PLAYER);				// we could use our default, but for now we'll be implicit
 	inputmanager = new InputManager;
 	ai = new AI;
 
@@ -49,18 +51,9 @@ void Game::createEntities()
 	gridbg = new Entity("Graphics/Grid.png");
 
 	// MAKE ENTITY CONSTRUCTOR FOR GRIDBG LATER HAHA
+	gridbg->getRect()->setSize(sf::Vector2f(300.f, 300.f));
 	gridbg->setOrigin(0.f, 0.f);
 	gridbg->setPosition(200, 25);
-
-	// Game functionality
-	// Clear our board for marker inputs (x's and o's)
-	for (int i = 0; i < 3; i++)
-	{
-		for (int j = 0; j < 3; j++)
-		{
-			boardArray[i][j] = NO_MARKER;
-		}
-	}
 
 	// Create our marker entities for placement
 	for (int i = 0; i < 3; i++)
@@ -72,7 +65,6 @@ void Game::createEntities()
 		{	
 			// 2 == SPRITErow; 1 == SPRITEcolumn
 			Entity* entity = new Entity("Graphics/XandO.png", gridbg->getRect()->getSize().x / 3, gridbg->getRect()->getSize().y / 3, 2, 1);
-			entity->setId('_');																	// sets the grid to empty '_'
 			entity->setGridPosition(i, j);														// sets a [i][j] position relative to the grid (e.g. [0][0] - [2][2])
 			markerVec[i].push_back(entity);
 
@@ -142,28 +134,30 @@ void Game::updateInput()
 
 void Game::updateAI()
 {
-	ai->moves = ai->minimax(markerVec);
-
-	for (int i = 0; i < 3; i++)
+	if (*statemanager->gameState == GAME_STATE::AI)
 	{
-		for (int j = 0; j < 3; j++)
+		ai->moves = ai->minimax(markerVec);
+
+		for (int i = 0; i < 3; i++)
 		{
-			if ((ai->moves.x == markerVec[i][j]->getGridPosition()->x) &&
-				(ai->moves.y == markerVec[i][j]->getGridPosition()->y))
+			for (int j = 0; j < 3; j++)
 			{
-				ai->switchFromXtoO(markerVec[i][j]);
-				markerVec[i][j]->setOpacity(255);
-				markerVec[i][j]->setId('O');
+				if ((ai->moves.x == markerVec[i][j]->getGridPosition()->x) &&
+					(ai->moves.y == markerVec[i][j]->getGridPosition()->y))
+				{
+					ai->switchFromXtoO(markerVec[i][j]);
+					markerVec[i][j]->setOpacity(255);
+					if (ai->checkWin(statemanager, markerVec))
+					{
+						std::cout << "AI WON" << std::endl;
+					}
+					std::cout << "input test" << std::endl;
+					*statemanager->gameState = GAME_STATE::PLAYER;
+				}
 			}
 		}
 	}
 }
-
-// notes
-// we can invoke the check if empty function in ai->checkifempty and pass our arrayBoard[][]?
-
-
-
 
 
 // Update our deltatime -- we will (maybe) use this to track time in-game

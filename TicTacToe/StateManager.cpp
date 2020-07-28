@@ -3,18 +3,18 @@
 // Default constructor just initializes State (starts as PLAYER, if menu is added we can start with MENU for example)
 StateManager::StateManager()
 {
-	state = new State;
+    gameState = new GAME_STATE;
 }
 
 // We can change the game state when we want to take turns
-StateManager::StateManager(State::GAME_STATE gameState)
+StateManager::StateManager(GAME_STATE gameState)
 {
-	state = new State;
+    this->gameState = new GAME_STATE;
 
-	state->gameState = gameState;
+    *this->gameState = gameState;
 }
 
 StateManager::~StateManager()
 {
-	delete state;
+    delete gameState;
 }

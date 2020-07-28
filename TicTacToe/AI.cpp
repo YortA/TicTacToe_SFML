@@ -36,9 +36,9 @@ bool AI::checkWin(StateManager* statemanager, std::vector<std::vector<Entity*>> 
 {
 	// We assign our playerValue to (1 or 2). This will let us know who wins the game
 	char playerValue = 0;
-	if (statemanager->state->gameState == State::GAME_STATE::PLAYER)
+	if (*statemanager->gameState == GAME_STATE::PLAYER)
 		playerValue = 'X';
-	else if (statemanager->state->gameState == State::GAME_STATE::AI)
+	else if (*statemanager->gameState == GAME_STATE::AI)
 		playerValue = 'O';
 
 	// Check our rows for three matching
@@ -113,7 +113,7 @@ bool AI::checkWin(StateManager* statemanager, std::vector<std::vector<Entity*>> 
 AI::Moves AI::minimax(std::vector<std::vector<Entity*>> markerVec)
 {
 	Moves duhbigmove;
-	int bestMove = 1000;
+	int bestMove = -100;
 
 	for (int i = 0; i < 3; i++)
 	{
@@ -121,7 +121,7 @@ AI::Moves AI::minimax(std::vector<std::vector<Entity*>> markerVec)
 		{
 			if (markerVec[i][j]->getId() == emptyMarker)			// if our cell is equal to empty
 			{
-				markerVec[i][j]->setId(aiMarker);		// 
+				markerVec[i][j]->setId(aiMarker);					// 
 				int tempMax = maxReturn(markerVec);
 				if (tempMax <= bestMove)
 				{
@@ -197,4 +197,5 @@ void AI::switchFromXtoO(Entity* entity)
 	textureSize.x /= 2;			// Only two images in sprite sheet -- this gets our "O" instead of "X"
 
 	entity->getRect()->setTextureRect(sf::IntRect(textureSize.x * 1, textureSize.y * 0, textureSize.x, textureSize.y));
+	entity->setId('O');
 }

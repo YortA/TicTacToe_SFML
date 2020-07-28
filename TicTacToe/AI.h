@@ -16,8 +16,8 @@ public:
 	//enum class PLAYER { HUMAN, AI };				// We use this enum to figure out whose turn it is
 	struct Moves
 	{
-		int x;		// our rows
-		int y;		// our cols
+		int x = 0;		// our rows
+		int y = 0;		// our cols
 	};
 
 	Moves moves;

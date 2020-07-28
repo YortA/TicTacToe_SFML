@@ -20,7 +20,7 @@ InputManager::~InputManager()
 void InputManager::update(Entity* entity, StateManager* statemanager, Window* window)
 {   
     // if our mouse is pressed, and it's the player's turn:
-    if ((sf::Mouse::isButtonPressed(sf::Mouse::Left)) && (statemanager->state->gameState == State::GAME_STATE::PLAYER))
+    if ((sf::Mouse::isButtonPressed(sf::Mouse::Left)) && (*statemanager->gameState == GAME_STATE::PLAYER))
     {
         // if the mouse is inside of the entity position
         if ((sf::Mouse::getPosition(*window->getWindow()).x > entity->getLeft()) &&
@@ -31,6 +31,8 @@ void InputManager::update(Entity* entity, StateManager* statemanager, Window* wi
             if (entity->getOpacity() < 255);
             {
                 entity->setOpacity(255);
+                entity->setId('X');                             // set our player marker
+                *statemanager->gameState = GAME_STATE::AI;
             }
         }
     }
