@@ -18,24 +18,24 @@ public:
 		int y = 0;		// our cols
 	};
 
-	/*enum class Stuff
+	enum class PLAYER
 	{
-		PLAYER,
-		AI
-	};*/
+		USER,
+		COMPUTER
+	};
 
 	Moves moves;
 
 	void switchFromXtoO(class Entity* entity);
 
-	bool isEmptySquare(std::vector<std::vector<class Entity*>> markerVec);
-	bool checkWin(class StateManager* statemanager, std::vector<std::vector<class Entity*>> markerVec);
-	bool gameOver(StateManager* statemanager, std::vector<std::vector<class Entity*>> markerVec);
+	bool isEmptySquare(char copyMarkervec[3][3]);
+	bool checkWin(PLAYER player, char copyMarkervec[3][3]);
+	bool gameOver(char copyMarkervec[3][3]);
 
-	Moves minimax(StateManager* statemanager, std::vector<std::vector<class Entity*>> markerVec);
-	int maxReturn(StateManager* statemanager, std::vector<std::vector<class Entity*>> markerVec);
-	int minReturn(StateManager* statemanager, std::vector<std::vector<class Entity*>> markerVec);
-	int score(StateManager* statemanager, std::vector<std::vector<class Entity*>> markerVec);
+	Moves minimax(std::vector<std::vector<class Entity*>> markerVec);
+	int maxReturn(char copyMarkervec[3][3]);
+	int minReturn(char copyMarkervec[3][3]);
+	int score(char copyMarkervec[3][3]);
 
 
 };

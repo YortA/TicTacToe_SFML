@@ -137,7 +137,7 @@ void Game::updateAI()
 {
 	if (*statemanager->gameState == GAME_STATE::AI)
 	{
-		ai->moves = ai->minimax(statemanager, markerVec);
+		ai->moves = ai->minimax(markerVec);
 		std::cout << "Best move is: " << ai->moves.x << ai->moves.y << std::endl;		// is returning 0,0 every time?
 		for (int i = 0; i < 3; i++)
 		{
@@ -148,10 +148,10 @@ void Game::updateAI()
 				{
 					ai->switchFromXtoO(markerVec[i][j]);
 					markerVec[i][j]->setOpacity(255);
-					if (ai->checkWin(statemanager, markerVec))
+					/*if (ai->checkWin(AI::Stuff::COMPUTER, markerVec))
 					{
 						std::cout << "AI WON" << std::endl;
-					}
+					}*/
 					std::cout << "input test" << std::endl;
 					*statemanager->gameState = GAME_STATE::PLAYER;
 				}
