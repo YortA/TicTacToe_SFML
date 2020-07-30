@@ -132,17 +132,18 @@ void Game::updateInput()
 	}
 }
 
+
 void Game::updateAI()
 {
 	if (*statemanager->gameState == GAME_STATE::AI)
 	{
-		ai->moves = ai->minimax(markerVec);
-
+		ai->moves = ai->minimax(statemanager, markerVec);
+		std::cout << "Best move is: " << ai->moves.x << ai->moves.y << std::endl;		// is returning 0,0 every time?
 		for (int i = 0; i < 3; i++)
 		{
 			for (int j = 0; j < 3; j++)
 			{
-				if ((ai->moves.x == markerVec[i][j]->getGridPosition()->x) &&
+				if ((ai->moves.x == markerVec[i][j]->getGridPosition()->x) &&			// if the move is within the bounds of the grid (array)
 					(ai->moves.y == markerVec[i][j]->getGridPosition()->y))
 				{
 					ai->switchFromXtoO(markerVec[i][j]);

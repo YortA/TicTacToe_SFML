@@ -140,7 +140,7 @@ void Entity::setOpacity(float x)
 		x));
 }
 
-// This will return our location in the grid for our entity [0][0] - [2][2]
+// This will return our location in the grid for our entity [0][0] - [2][2] ([x][y])
 void Entity::setGridPosition(int x, int y)
 {
 	gridPosition->x = x;

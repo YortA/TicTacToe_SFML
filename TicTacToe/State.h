@@ -3,9 +3,9 @@
 #pragma once
 
 // State enums
-	enum class GAME_STATE
-	{
-		PLAYER,			// player == 0
-		AI,
-		GAMEOVER
-	};
+enum class GAME_STATE
+{
+	PLAYER,			// player == 0
+	AI,
+	GAMEOVER
+};

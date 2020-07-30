@@ -7,18 +7,22 @@ private:
 	char humanMarker = 'X';
 	char aiMarker = 'O';
 	char emptyMarker = '_';
-	//int playerTurn;
 
 public:
 	AI();
 	~AI();
-
-	//enum class PLAYER { HUMAN, AI };				// We use this enum to figure out whose turn it is
+	
 	struct Moves
 	{
 		int x = 0;		// our rows
 		int y = 0;		// our cols
 	};
+
+	/*enum class Stuff
+	{
+		PLAYER,
+		AI
+	};*/
 
 	Moves moves;
 
@@ -26,11 +30,12 @@ public:
 
 	bool isEmptySquare(std::vector<std::vector<class Entity*>> markerVec);
 	bool checkWin(class StateManager* statemanager, std::vector<std::vector<class Entity*>> markerVec);
-	bool gameOver(std::vector<std::vector<class Entity*>> markerVec);
+	bool gameOver(StateManager* statemanager, std::vector<std::vector<class Entity*>> markerVec);
 
+	Moves minimax(StateManager* statemanager, std::vector<std::vector<class Entity*>> markerVec);
+	int maxReturn(StateManager* statemanager, std::vector<std::vector<class Entity*>> markerVec);
+	int minReturn(StateManager* statemanager, std::vector<std::vector<class Entity*>> markerVec);
+	int score(StateManager* statemanager, std::vector<std::vector<class Entity*>> markerVec);
 
-	Moves minimax(std::vector<std::vector<class Entity*>> markerVec);
-	int maxReturn(std::vector<std::vector<class Entity*>> markerVec);
-	int minReturn(std::vector<std::vector<class Entity*>> markerVec);
 
 };
