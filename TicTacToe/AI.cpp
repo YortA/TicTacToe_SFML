@@ -94,7 +94,7 @@ bool AI::gameOver(char copyMarkervec[3][3])
 {
 	if (checkWin(PLAYER::USER, copyMarkervec)) { return true; }
 	else if (checkWin(PLAYER::COMPUTER, copyMarkervec)) { return true; }
-	return !hasEmptySquare(copyMarkervec);		// If no one wins, we return empty cell -- mirror the call for 
+	return !hasEmptySquare(copyMarkervec);		// If no one wins, we return empty cell -- mirror the call
 }
 
 
@@ -135,8 +135,8 @@ AI::Moves AI::minimax(std::vector<std::vector<Entity*>> markerVec)
 			std::cout << copyMarkervec[i][j] << std::endl;	// debug to ensure our values are right
 		}
 	}
-
-	int bestMove = 100000;
+	
+	int bestMove = 10000;
 	Moves duhbigmove;
 
 	for (int i = 0; i < 3; i++)
@@ -164,10 +164,16 @@ AI::Moves AI::minimax(std::vector<std::vector<Entity*>> markerVec)
 
 int AI::maxReturn(char copyMarkervec[3][3], int iteration)
 {
-	if (gameOver(copyMarkervec)) return score(copyMarkervec);	// check to see if it's a winning placement and the returned score value
+	//if (gameOver(copyMarkervec)) return score(copyMarkervec);	// check to see if it's a winning placement and the returned score value
+	if (gameOver(copyMarkervec))
+	{
+		int metric = score(copyMarkervec);
+		return metric + signFN(metric) * iteration;
+		//return score(copyMarkervec);
+	}
 
 	Moves duhbigmove;
-	int bestMove = -100000;
+	int bestMove = -10000;
 
 	for (int i = 0; i < 3; i++)
 	{
@@ -196,11 +202,10 @@ int AI::minReturn(char copyMarkervec[3][3], int iteration)
 	{
 		int metric = score(copyMarkervec);
 		return metric - signFN(metric) * iteration;
-		//return score(copyMarkervec);
 	}
 
 	Moves duhbigmove;
-	int bestMove = 100000;
+	int bestMove = 10000;
 
 	for (int i = 0; i < 3; i++)
 	{
