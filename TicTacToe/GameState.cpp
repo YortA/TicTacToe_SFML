@@ -6,8 +6,11 @@
 #include "StateManager.h"
 #include "InputManager.h"
 #include "AI.h"
+#include "SFML/Window/Mouse.hpp"
 
 #include <iostream>
+
+#include "MYDEBUGHELPER.h"
 
 
 #define NO_MARKER -1		// our empty piece int
@@ -120,46 +123,42 @@ void Game::render()
 // Allows us to call our update functionality for mouse clicks on screen
 void Game::updateInput()
 {
-	//inputmanager->update(background, statemanager, window);			// what is this even for
-
-	// Iterate through all of the cells
-	for (int i = 0; i < 3; i++)
+	if (inputmanager->DidMouseTrigger() && !GameEnd())
 	{
-		for (int j = 0; j < 3; j++)
-		{
-			inputmanager->update(markerVec[i][j], statemanager, window);
-		}
-	}
-}
-
-
-void Game::updateAI()
-{
-	if (*statemanager->gameState == GAME_STATE::AI)
-	{
-		ai->moves = ai->minimax(markerVec);
-		std::cout << "Best move is: " << ai->moves.x << ai->moves.y << std::endl;		// is returning 0,0 every time?
+		// Iterate through all of the cells
 		for (int i = 0; i < 3; i++)
 		{
 			for (int j = 0; j < 3; j++)
 			{
-				if ((ai->moves.x == markerVec[i][j]->getGridPosition()->x) &&			// if the move is within the bounds of the grid (array)
-					(ai->moves.y == markerVec[i][j]->getGridPosition()->y))
-				{
-					ai->switchFromXtoO(markerVec[i][j]);
-					markerVec[i][j]->setOpacity(255);
-					/*if (ai->checkWin(AI::Stuff::COMPUTER, markerVec))
-					{
-						std::cout << "AI WON" << std::endl;
-					}*/
-					std::cout << "input test" << std::endl;
-					*statemanager->gameState = GAME_STATE::PLAYER;
-				}
+				inputmanager->update(markerVec[i][j], statemanager, window);
 			}
 		}
 	}
 }
 
+void Game::updateAI()
+{
+	if (*statemanager->gameState == GAME_STATE::AI && !GameEnd())
+	{
+		AI::Moves moves = ai->minimax(markerVec);
+		Entity* targetcell = markerVec[moves.x][moves.y];
+		ai->switchFromXtoO(targetcell);
+		debugger->my_debug_timer2();
+		std::cerr << "DEBUG: Best move is: [" << moves.x << "]["<< moves.y << "]" << std::endl;
+		targetcell->setOpacity(255);
+		*statemanager->gameState = GAME_STATE::PLAYER;
+	}
+}
+
+bool Game::GameEnd()
+{
+	if (ai->checkWin_Game(AI::PLAYER::COMPUTER, markerVec) || ai->checkWin_Game(AI::PLAYER::USER, markerVec))
+	{
+		return true;
+	}
+	else
+		return false;
+}
 
 // Update our deltatime -- we will (maybe) use this to track time in-game
 void Game::updateDelta()
@@ -185,7 +184,6 @@ void Game::draw()
 	// Background
 	background->setPosition(400, 300);
 	window->draw(*background->getRect());
-
 	window->draw(*gridbg->getRect());
 
 

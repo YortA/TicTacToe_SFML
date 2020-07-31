@@ -5,6 +5,8 @@
 class Game
 {
 private:
+	class myDebugger* debugger = nullptr;
+
 	// Pointer classes to render our window
 	class Window* window = nullptr;
 	class DeltaTime* deltatime = nullptr;
@@ -30,6 +32,8 @@ private:
 
 	// Game Functionality
 	std::vector<std::vector<Entity*>> markerVec;	// MD vector hurrr
+	//int turns = 0;
+	bool GameEnd();
 
 public:
 	// Constructor/Destructors

@@ -4,6 +4,8 @@
 #include "Window.h"
 #include "SFML/Window/Mouse.hpp"			// for sfml mouse functionality
 
+#include "MYDEBUGHELPER.h"
+
 InputManager::InputManager()
 {
 
@@ -17,8 +19,30 @@ InputManager::~InputManager()
 // Check if our mouse is hovering over an entity (no_marker) and if it is, allow a click
 // TO DO:
 // Check to make sure there's not already an entity in that location
+//void InputManager::update(Entity* entity, StateManager* statemanager, Window* window)
+//{   
+//    // if our mouse is pressed, and it's the player's turn:
+//    if ((sf::Mouse::isButtonPressed(sf::Mouse::Left)) && (*statemanager->gameState == GAME_STATE::PLAYER))
+//    {
+//        // if the mouse is inside of the entity position
+//        if ((sf::Mouse::getPosition(*window->getWindow()).x > entity->getLeft()) &&
+//            (sf::Mouse::getPosition(*window->getWindow()).x < entity->getWidth()) &&
+//            (sf::Mouse::getPosition(*window->getWindow()).y > entity->getTop()) &&
+//            (sf::Mouse::getPosition(*window->getWindow()).y < entity->getHeight()))
+//        {
+//            if (entity->getOpacity() < 255);
+//            {
+//                debugger->my_debug_timer("InputManager() function called.");            // debug shit
+//                entity->setOpacity(255);
+//                entity->setId('X');                             // set our player marker
+//                *statemanager->gameState = GAME_STATE::AI;
+//            }
+//        }
+//    }
+//}
+
 void InputManager::update(Entity* entity, StateManager* statemanager, Window* window)
-{   
+{
     // if our mouse is pressed, and it's the player's turn:
     if ((sf::Mouse::isButtonPressed(sf::Mouse::Left)) && (*statemanager->gameState == GAME_STATE::PLAYER))
     {
@@ -30,10 +54,23 @@ void InputManager::update(Entity* entity, StateManager* statemanager, Window* wi
         {
             if (entity->getOpacity() < 255);
             {
+                debugger->my_debug_timer("InputManager() function called.");            // debug shit
                 entity->setOpacity(255);
                 entity->setId('X');                             // set our player marker
                 *statemanager->gameState = GAME_STATE::AI;
             }
         }
     }
+}
+
+bool InputManager::DidMouseTrigger()
+{
+    bool isDown = sf::Mouse::isButtonPressed(sf::Mouse::Left);
+
+    if (isDown != mouseState)
+    {
+        mouseState = isDown;
+        return isDown;
+    }
+    return false;
 }

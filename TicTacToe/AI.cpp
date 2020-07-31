@@ -2,7 +2,7 @@
 #include "Entity.h"
 #include "StateManager.h"
 
-#include <iostream>				// debug purposes
+#include "MYDEBUGHELPER.h"
 
 AI::AI()
 {
@@ -18,7 +18,7 @@ AI::~AI()
 // our isEmptySquare function is causing a runtime error?
 
 // Let's check to see if our cell is empty
-bool AI::isEmptySquare(char copyMarkervec[3][3])
+bool AI::hasEmptySquare(char copyMarkervec[3][3])
 {
 	for (int i = 0; 0 < 3; i++)
 	{
@@ -33,9 +33,6 @@ bool AI::isEmptySquare(char copyMarkervec[3][3])
 	// If the cell is taken
 	return false;
 }
-
-
-
 
 // Check to see if the PLAYER or AI won
 bool AI::checkWin(PLAYER player, char copyMarkervec[3][3])
@@ -98,7 +95,7 @@ bool AI::gameOver(char copyMarkervec[3][3])
 	// how can we actually check if we win by passing PLAYER or AI without the markerVec?
 	if (checkWin(PLAYER::USER, copyMarkervec)) { return true; }
 	else if (checkWin(PLAYER::COMPUTER, copyMarkervec)) { return true; }
-	return isEmptySquare(copyMarkervec);
+	return !hasEmptySquare(copyMarkervec);
 }
 
 
@@ -147,7 +144,7 @@ AI::Moves AI::minimax(std::vector<std::vector<Entity*>> markerVec)
 	{
 		for (int j = 0; j < 3; j++)
 		{
-			if (copyMarkervec[i][j] = emptyMarker)		// if our cell is equal to empty
+			if (copyMarkervec[i][j] == emptyMarker)		// if our cell is equal to empty
 			{
 				copyMarkervec[i][j] = aiMarker;					// 
 				int tempMax = maxReturn(copyMarkervec);
@@ -156,7 +153,7 @@ AI::Moves AI::minimax(std::vector<std::vector<Entity*>> markerVec)
 					bestMove = tempMax;
 					duhbigmove.x = i;
 					duhbigmove.y = j;
-					std::cerr << "DEBUG: minimax() fn called." << std::endl;
+					debugger->my_debug_timer("DEBUG: minimax() fn called.");
 				}
 				copyMarkervec[i][j] = emptyMarker;			// reset our cell back to empty
 			}
@@ -231,4 +228,58 @@ void AI::switchFromXtoO(Entity* entity)
 
 	entity->getRect()->setTextureRect(sf::IntRect(textureSize.x * 1, textureSize.y * 0, textureSize.x, textureSize.y));
 	entity->setId('O');
+}
+
+bool AI::checkWin_Game(PLAYER player, std::vector<std::vector<class Entity*>> markerVec)
+{
+	// We assign our playerValue to (1 or 2). This will let us know who wins the game
+	char playerValue = 0;
+	if (player == PLAYER::USER)
+		playerValue = humanMarker;
+	else if (player == PLAYER::COMPUTER)
+		playerValue = aiMarker;
+
+	// Check our rows for three matching
+	for (int row = 0; row < 3; row++)
+	{
+		if (markerVec[row][0]->getId() == markerVec[row][1]->getId() &&
+			markerVec[row][1]->getId() == markerVec[row][2]->getId())
+		{
+			if (markerVec[row][0]->getId() == playerValue)			// we need to check if the winner is a player or AI.
+			{
+				return true;
+			}
+		}
+	}
+
+	// Check our columns for three matching
+	for (int col = 0; col < 3; col++)
+	{
+		if (markerVec[0][col]->getId() == markerVec[1][col]->getId() &&
+			markerVec[1][col]->getId() == markerVec[2][col]->getId())
+		{
+			if (markerVec[0][col]->getId() == playerValue)			// we need to check if the winner is a player or AI.
+			{
+				return true;
+			}
+		}
+	}
+
+	// Check for diagonals for three matching
+	if (markerVec[0][0]->getId() == markerVec[1][1]->getId() && markerVec[1][1]->getId() == markerVec[2][2]->getId())
+	{
+		if (markerVec[0][0]->getId() == playerValue)
+			return true;
+	}
+
+	if (markerVec[0][2]->getId() == markerVec[1][1]->getId() && markerVec[1][1]->getId() == markerVec[2][0]->getId())
+	{
+		if (markerVec[0][2]->getId() == playerValue)
+		{
+			return true;
+		}
+	}
+
+	// Didn't win
+	return false;
 }

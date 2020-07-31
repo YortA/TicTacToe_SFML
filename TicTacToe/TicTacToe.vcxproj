@@ -159,6 +159,7 @@
   <ItemGroup>
     <ClInclude Include="AI.h" />
     <ClInclude Include="Clock.h" />
+    <ClInclude Include="MYDEBUGHELPER.h" />
     <ClInclude Include="DeltaTime.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="GameState.h" />
