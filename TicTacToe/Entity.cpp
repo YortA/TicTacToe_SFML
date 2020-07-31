@@ -27,6 +27,7 @@ void Entity::create(std::string texture)
 	this->texture = new sf::Texture;		// we have to use this-> because we're referencing the member out of scope
 
 	this->texture->loadFromFile(texture);	// pass our argument to load a specific texture
+	// get our texture rect shape and size
 	rect = new sf::RectangleShape(sf::Vector2f((float)this->texture->getSize().x, (float)this->texture->getSize().y));
 	rect->setTexture(this->texture);
 	rect->setOrigin(sf::Vector2f(this->texture->getSize().x / 2.0f, this->texture->getSize().y / 2.0f));
@@ -36,15 +37,15 @@ void Entity::create(std::string texture)
 void Entity::create(std::string texture, float width, float height, int spriterows, int spritecolumns)
 {
 	this->texture = new sf::Texture;
-	gridPosition = new sf::Vector2i;  
+	gridPosition = new sf::Vector2i;		// used to set/get our grid position	// currently deprecated (new method used in gamestate)
 
-	this->texture->loadFromFile(texture);
-	rect = new sf::RectangleShape(sf::Vector2f(width, height));
-	rect->setTexture(this->texture);
+	this->texture->loadFromFile(texture);	// get our texture image
+	rect = new sf::RectangleShape(sf::Vector2f(width, height));	// set our rect shape for this object
+	rect->setTexture(this->texture);		// set rect to our texture we just imported
 	
-	// addition for uvRect
+	// addition for uvRect -- we use this to get our sprite out of our sprite sheet. (X and O) see createEntities() in gamestate.cpp
 	rect->setTextureRect(sf::IntRect(0, 0, this->texture->getSize().x / spriterows, this->texture->getSize().y / spritecolumns));
-
+	// set our origin for the rect (0,0) by default
 	rect->setOrigin(sf::Vector2f(this->texture->getSize().x / 2.0f, this->texture->getSize().y / 2.0f));
 }
 
@@ -55,6 +56,7 @@ void Entity::destroy()
 }
 
 // getters for our SFML
+// SEE https://www.sfml-dev.org/documentation/2.5.1/annotated.php
 sf::Texture* Entity::getTexture()
 {
 	return texture;

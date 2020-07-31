@@ -5,6 +5,7 @@
 #include <chrono>
 #pragma warning(disable : 4996)
 
+// This is my test debugger. Checking timestamps of the actions in the program
 class myDebugger 
 {
 private:
@@ -24,8 +25,8 @@ public:
 
 	void my_debug_timer2()
 	{
-		unsigned __int64 now = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+		unsigned __int64 dtimer = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 
-		std::cerr << now << ": ";
+		std::cerr << dtimer << ": ";
 	}
 };

@@ -1,6 +1,6 @@
 #include "WindowParams.h"
 
-// Pass our values into our overload constructor
+// passed into our window.cpp function. gives the parameters for our window -- we can use this later to have resolution options
 WindowParams::WindowParams(const char* id, int width, int height, bool fullscreen)
 	: id(id),
 	width(width),

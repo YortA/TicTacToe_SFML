@@ -1,5 +1,8 @@
 #pragma once
 
+// SEE https://www.sfml-dev.org/tutorials/2.5/system-time.php
+// for more info on how time works in sfml
+
 class DeltaTime
 {
 private:
@@ -10,7 +13,7 @@ private:
 		SECONDS
 	};
 
-	TOGGLE toggle;			// create our toggle enum class inside our class
+	TOGGLE toggle;						// create our toggle enum class object
 
 	class Clock* clock = nullptr;		// point to our clock class 
 
@@ -23,11 +26,11 @@ public:
 
 	void update();	// we need to update in order to render
 
-	// Get our private members
+	// get our private members
 	float getTimeElapsed();
 	float getRestart();
 
-	// Toggle variable, set our enum to one
+	// toggle variable, set our enum to one
 	void toggleMicroseconds();
 	void toggleMilliseconds();
 	void toggleSeconds();

@@ -19,7 +19,7 @@ DeltaTime::~DeltaTime()
 //
 //
 
-// Update functions
+// Update functions -- time isn't very interesting... 
 void DeltaTime::update()
 {
 	switch (toggle)

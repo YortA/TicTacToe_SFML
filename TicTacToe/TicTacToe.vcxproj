@@ -151,7 +151,6 @@
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="State.cpp" />
     <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="WindowParams.cpp" />

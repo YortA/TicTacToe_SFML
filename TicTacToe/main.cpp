@@ -3,6 +3,7 @@
 // TicTacToe using SFML
 
 // Refernces for setting up SFML Game Development by Example (eBook)
+// SFML: https://www.sfml-dev.org/documentation/2.5.1/index.php
 
 #include "GameState.h"
 
@@ -19,3 +20,7 @@ int main()
 		TicTacToe.render();
 	}
 }
+
+// BUG LIST
+
+// we need to prevent changing states when clicking on an existing entity. this way the AI doesn't get an extra turn. (see gamestate.cpp)

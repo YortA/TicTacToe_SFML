@@ -39,16 +39,20 @@ void Window::destroy()
 }
 
 // Update and render
+// https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1RenderWindow.php#a6bb6f0ba348f2b1e2f46114aeaf60f26
 void Window::clear()
 {
 	window->clear(sf::Color::Black);
 }
 
+// allows us to draw entities and other things in our window
 void Window::draw(sf::Drawable& drawable)
 {
 	window->draw(drawable);
 }
 
+// displays what has been rendered on the screen
+// https://www.sfml-dev.org/documentation/2.5.1/classsf_1_1Window.php#adabf839cb103ac96cfc82f781638772a
 void Window::display()
 {
 	window->display();
@@ -82,6 +86,7 @@ unsigned int Window::getHeight()
 {
 	return window->getSize().y;
 }
+
 //
 //
 //

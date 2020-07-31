@@ -26,8 +26,8 @@ private:
 	// Rendering "heartbeat" updates
 	void updateDelta();
 	void updateEvent();
-	void updateInput();
-	void updateAI();
+	void updateInput();			// player game loop
+	void updateAI();			// ai game loop
 
 
 	// Game Functionality

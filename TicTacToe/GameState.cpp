@@ -12,10 +12,6 @@
 
 #include "MYDEBUGHELPER.h"
 
-
-#define NO_MARKER -1		// our empty piece int
-
-
 Game::Game(const char* id, int width, int height, bool fullscreen)
 {
 	create(id, width, height, fullscreen);
@@ -38,13 +34,13 @@ Game::~Game()
 // Main game engine create
 void Game::create(const char* id, int width, int height, bool fullscreen)
 {
-	window = new Window{ id, width, height, fullscreen };
-	deltatime = new DeltaTime;
+	window = new Window{ id, width, height, fullscreen };				// create a new window object and pass our params
+	deltatime = new DeltaTime;											// create a time object (to be used later)
 	statemanager = new StateManager(GAME_STATE::PLAYER);				// we could use our default, but for now we'll be implicit
-	inputmanager = new InputManager;
-	ai = new AI;
+	inputmanager = new InputManager;									// user functions
+	ai = new AI;														// ai functions
 
-	createEntities();
+	createEntities();													// initialize all of our game objects
 }
 
 void Game::createEntities()
@@ -53,12 +49,12 @@ void Game::createEntities()
 	background = new Entity("Graphics/Background_Board.png");
 	gridbg = new Entity("Graphics/Grid.png");
 
-	// MAKE ENTITY CONSTRUCTOR FOR GRIDBG LATER HAHA
+	// set our game entity variables
 	gridbg->getRect()->setSize(sf::Vector2f(300.f, 300.f));
 	gridbg->setOrigin(0.f, 0.f);
-	gridbg->setPosition(200, 25);
+	gridbg->setPosition(250, 25);
 
-	// Create our marker entities for placement
+	// create our marker entities for placement x and o placements
 	for (int i = 0; i < 3; i++)
 	{
 		std::vector<Entity*> entityRow;
@@ -116,7 +112,7 @@ void Game::update()
 void Game::render()
 {
 	clear();
-	draw();
+	draw();				// draw things in our window
 	display();
 }
 
@@ -140,16 +136,17 @@ void Game::updateAI()
 {
 	if (*statemanager->gameState == GAME_STATE::AI && !GameEnd())
 	{
-		AI::Moves moves = ai->minimax(markerVec);
-		Entity* targetcell = markerVec[moves.x][moves.y];
-		ai->switchFromXtoO(targetcell);
-		debugger->my_debug_timer2();
-		std::cerr << "DEBUG: Best move is: [" << moves.x << "]["<< moves.y << "]" << std::endl;
-		targetcell->setOpacity(255);
-		*statemanager->gameState = GAME_STATE::PLAYER;
+		AI::Moves moves = ai->minimax(markerVec);			// get our minimax x and y
+		Entity* targetcell = markerVec[moves.x][moves.y];	// save our location
+		ai->switchFromXtoO(targetcell);						// call our placement marker
+		debugger->my_debug_timer2();						// debug time stamp
+		std::cerr << "DEBUG: Best move is: [" << moves.x << "]["<< moves.y << "]" << std::endl;		// debug time stamp
+		targetcell->setOpacity(255);						// switch the opacity
+		*statemanager->gameState = GAME_STATE::PLAYER;		// change the state, now it's the player's turn
 	}
 }
 
+// logical check to see if our USER or AI has won
 bool Game::GameEnd()
 {
 	if (ai->checkWin_Game(AI::PLAYER::COMPUTER, markerVec) || ai->checkWin_Game(AI::PLAYER::USER, markerVec))
