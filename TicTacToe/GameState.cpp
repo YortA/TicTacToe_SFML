@@ -6,8 +6,10 @@
 #include "StateManager.h"
 #include "InputManager.h"
 #include "AI.h"
+#include "Sound.h"
 #include "SFML/Window/Mouse.hpp"
 
+// C++ / Windows includes
 #include <iostream>
 
 #include "MYDEBUGHELPER.h"
@@ -54,6 +56,10 @@ void Game::createEntities()
 	gridbg->setOrigin(0.f, 0.f);
 	gridbg->setPosition(250, 25);
 
+	// Sound Entitys
+	soundPop1 = new Sound("Sounds/pop_1.wav");
+	//soundPop2 = new Sound("Sounds/pop_2.wav");
+
 	// create our marker entities for placement x and o placements
 	for (int i = 0; i < 3; i++)
 	{
@@ -89,6 +95,9 @@ void Game::destroy()
 	// delete game entities
 	delete background;
 	delete gridbg;
+
+	// delete sound entities
+	delete soundPop1;
 
 	for (int i = 0; i < 3; i++)
 	{
@@ -142,6 +151,7 @@ void Game::updateAI()
 		debugger->my_debug_timer2();						// debug time stamp
 		std::cerr << "DEBUG: Best move is: [" << moves.x << "]["<< moves.y << "]" << std::endl;		// debug time stamp
 		targetcell->setOpacity(255);						// switch the opacity
+		soundPop1->play();
 		*statemanager->gameState = GAME_STATE::PLAYER;		// change the state, now it's the player's turn
 	}
 }

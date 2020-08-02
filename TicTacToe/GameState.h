@@ -18,6 +18,9 @@ private:
 	class Entity* background = nullptr;
 	class Entity* gridbg = nullptr;
 
+	// Sound entities
+	class Sound* soundPop1 = nullptr;
+
 	// Rendering functions
 	void clear();
 	void draw();

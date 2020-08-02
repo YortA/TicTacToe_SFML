@@ -53,6 +53,7 @@ void Entity::destroy()
 {
 	delete texture;
 	delete rect;
+	delete gridPosition;
 }
 
 // getters for our SFML
