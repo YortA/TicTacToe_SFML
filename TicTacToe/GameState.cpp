@@ -8,6 +8,7 @@
 #include "AI.h"
 #include "Sound.h"
 #include "SFML/Window/Mouse.hpp"
+//#include "SFML/System/Time.hpp"
 
 // C++ / Windows includes
 #include <iostream>
@@ -40,7 +41,7 @@ void Game::create(const char* id, int width, int height, bool fullscreen)
 	deltatime = new DeltaTime;											// create a time object (to be used later)
 	statemanager = new StateManager(GAME_STATE::PLAYER);				// we could use our default, but for now we'll be implicit
 	inputmanager = new InputManager;									// user functions
-	ai = new AI;														// ai functions
+	ai = new AI;	
 
 	createEntities();													// initialize all of our game objects
 }

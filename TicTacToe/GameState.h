@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include "SFML/System/Time.hpp"
 // Our main game class that controls all functionality
 
 class Game
@@ -31,7 +32,6 @@ private:
 	void updateEvent();
 	void updateInput();			// player game loop
 	void updateAI();			// ai game loop
-
 
 	// Game Functionality
 	std::vector<std::vector<Entity*>> markerVec;	// MD vector hurrr
