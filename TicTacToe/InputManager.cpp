@@ -3,17 +3,18 @@
 #include "Entity.h"
 #include "Window.h"
 #include "SFML/Window/Mouse.hpp"			// for sfml mouse functionality
+#include "Sound.h"
 
 #include "MYDEBUGHELPER.h"
 
 InputManager::InputManager()
 {
-
+    soundPop2 = new Sound("Sounds/pop_2.wav");
 }
 
 InputManager::~InputManager()
 {
-
+    delete soundPop2;
 }
 
 // Check if our mouse is hovering over an entity (no_marker) and if it is, allow a click
@@ -31,6 +32,7 @@ void InputManager::update(Entity* entity, StateManager* statemanager, Window* wi
             if (entity->getOpacity() < 255);
             {
                 debugger->my_debug_timer("InputManager() function called.");    // timestamps for console
+                soundPop2->play();
                 entity->setOpacity(255);
                 entity->setId('X');                                             // set our player marker
                 *statemanager->gameState = GAME_STATE::AI;                      // gamestate back to AI

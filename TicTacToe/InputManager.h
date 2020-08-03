@@ -6,6 +6,8 @@ private:
 	class myDebugger* debugger = nullptr;
 	bool mouseState = false;
 
+	class Sound* soundPop2 = nullptr;
+
 public:
 	InputManager();
 	~InputManager();

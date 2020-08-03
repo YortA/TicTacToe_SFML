@@ -153,6 +153,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="StateManager.cpp" />
+    <ClCompile Include="UI.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="WindowParams.cpp" />
   </ItemGroup>
@@ -167,6 +168,7 @@
     <ClInclude Include="Sound.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateManager.h" />
+    <ClInclude Include="UI.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="WindowParams.h" />
   </ItemGroup>

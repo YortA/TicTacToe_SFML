@@ -7,8 +7,8 @@
 #include "InputManager.h"
 #include "AI.h"
 #include "Sound.h"
+#include "UI.h"
 #include "SFML/Window/Mouse.hpp"
-//#include "SFML/System/Time.hpp"
 
 // C++ / Windows includes
 #include <iostream>
@@ -41,8 +41,10 @@ void Game::create(const char* id, int width, int height, bool fullscreen)
 	deltatime = new DeltaTime;											// create a time object (to be used later)
 	statemanager = new StateManager(GAME_STATE::PLAYER);				// we could use our default, but for now we'll be implicit
 	inputmanager = new InputManager;									// user functions
-	ai = new AI;	
+	ai = new AI;
+	ui = new UI;
 
+	window->getWindow()->setFramerateLimit(60);
 	createEntities();													// initialize all of our game objects
 }
 
@@ -52,14 +54,13 @@ void Game::createEntities()
 	background = new Entity("Graphics/Background_Board.png");
 	gridbg = new Entity("Graphics/Grid.png");
 
-	// set our game entity variables
+	// Set our game entity variables
 	gridbg->getRect()->setSize(sf::Vector2f(300.f, 300.f));
 	gridbg->setOrigin(0.f, 0.f);
 	gridbg->setPosition(250, 25);
 
 	// Sound Entitys
 	soundPop1 = new Sound("Sounds/pop_1.wav");
-	//soundPop2 = new Sound("Sounds/pop_2.wav");
 
 	// create our marker entities for placement x and o placements
 	for (int i = 0; i < 3; i++)
@@ -82,6 +83,10 @@ void Game::createEntities()
 				(((gridbg->getRect()->getSize().y) / 3) * i) + gridbg->getPosition().y);		// and then add them. so; x = 0 + 250, 100 + 250 = 350, etc.
 		}
 	}
+
+	font = ui->createFont("Graphics/ChessType.ttf");
+	MessageBoxA = ui->createMenuBox(font, 50, 50, 0, 0, "Text");
+
 }
 
 void Game::destroy()
@@ -92,6 +97,7 @@ void Game::destroy()
 	delete statemanager;
 	delete inputmanager;
 	delete ai;
+	delete ui;
 
 	// delete game entities
 	delete background;
@@ -146,14 +152,20 @@ void Game::updateAI()
 {
 	if (*statemanager->gameState == GAME_STATE::AI && !GameEnd())
 	{
-		AI::Moves moves = ai->minimax(markerVec);			// get our minimax x and y
-		Entity* targetcell = markerVec[moves.x][moves.y];	// save our location
-		ai->switchFromXtoO(targetcell);						// call our placement marker
-		debugger->my_debug_timer2();						// debug time stamp
-		std::cerr << "DEBUG: Best move is: [" << moves.x << "]["<< moves.y << "]" << std::endl;		// debug time stamp
-		targetcell->setOpacity(255);						// switch the opacity
-		soundPop1->play();
-		*statemanager->gameState = GAME_STATE::PLAYER;		// change the state, now it's the player's turn
+		// update based on frame (ghetto timer)
+		turntimer += .1f;
+		if (turntimer >= 5.f)
+		{
+			AI::Moves moves = ai->minimax(markerVec);			// get our minimax x and y
+			Entity* targetcell = markerVec[moves.x][moves.y];	// save our location
+			ai->switchFromXtoO(targetcell);						// call our placement marker
+			debugger->my_debug_timer2();						// debug time stamp
+			std::cerr << "DEBUG: Best move is: [" << moves.x << "][" << moves.y << "]" << std::endl;		// debug time stamp
+			targetcell->setOpacity(255);						// switch the opacity
+			soundPop1->play();									// play our 'O' sound
+			*statemanager->gameState = GAME_STATE::PLAYER;		// change the state, now it's the player's turn
+			turntimer = 0.0f;									// reset timer after AI move
+		}
 	}
 }
 
@@ -193,6 +205,9 @@ void Game::draw()
 	background->setPosition(400, 300);
 	window->draw(*background->getRect());
 	window->draw(*gridbg->getRect());
+
+
+	window->draw(*MessageBoxA);
 
 
 

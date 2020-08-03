@@ -1,6 +1,8 @@
 #pragma once
 #include <vector>
 #include "SFML/System/Time.hpp"
+#include "SFML/Graphics/RectangleShape.hpp"
+
 // Our main game class that controls all functionality
 
 class Game
@@ -14,10 +16,14 @@ private:
 	class StateManager* statemanager = nullptr;
 	class InputManager* inputmanager = nullptr;
 	class AI* ai = nullptr;
+	class UI* ui = nullptr;
 
 	// Initialize entities
 	class Entity* background = nullptr;
 	class Entity* gridbg = nullptr;
+	// MENU
+	sf::RectangleShape* MessageBoxA = nullptr;
+	sf::Font* font = nullptr;
 
 	// Sound entities
 	class Sound* soundPop1 = nullptr;
@@ -37,6 +43,12 @@ private:
 	std::vector<std::vector<Entity*>> markerVec;	// MD vector hurrr
 	//int turns = 0;
 	bool GameEnd();
+
+
+
+
+	// Gets our turn timer
+	float turntimer = 0;
 
 public:
 	// Constructor/Destructors
