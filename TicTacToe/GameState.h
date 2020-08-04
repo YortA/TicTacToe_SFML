@@ -22,11 +22,13 @@ private:
 	class Entity* background = nullptr;
 	class Entity* gridbg = nullptr;
 	// MENU
-	sf::RectangleShape* MessageBoxA = nullptr;
-	sf::Font* font = nullptr;
+	/*sf::RectangleShape* MessageBoxA = nullptr;
+	sf::Font* font = nullptr;*/
 
 	// Sound entities
 	class Sound* soundPop1 = nullptr;
+	class Sound* soundWinner = nullptr;
+	class Sound* musicbg = nullptr;
 
 	// Rendering functions
 	void clear();
@@ -38,12 +40,12 @@ private:
 	void updateEvent();
 	void updateInput();			// player game loop
 	void updateAI();			// ai game loop
+	void updateWinner();
 
 	// Game Functionality
 	std::vector<std::vector<Entity*>> markerVec;	// MD vector hurrr
-	//int turns = 0;
 	bool GameEnd();
-
+	bool boolgameEndSound = true;						// play our "winner" sound
 
 
 

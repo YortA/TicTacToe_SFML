@@ -1,24 +1,4 @@
 ﻿  GameState.cpp
-  UI.cpp
-C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\UI.cpp(15,75): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\UI.cpp(15,68): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\UI.cpp(16,42): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\UI.cpp(16,36): warning C4244: 'argument': conversion from 'int' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-  Generating Code...
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\GameState.cpp(104,11): warning C4150: deletion of pointer to incomplete type 'UI'; no destructor called
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\GameState.h(19): message : see declaration of 'UI'
   TicTacToe.vcxproj -> C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\Debug\TicTacToe.exe

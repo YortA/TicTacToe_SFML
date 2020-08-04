@@ -15,7 +15,7 @@ private:
 	sf::RectangleShape* rect = nullptr;		// required so that Texture* texture can be set
 	sf::Vector2i* gridPosition = nullptr;
 
-	char id = '_';			// 'x', 'o', or '_'
+	char id = '_';			// 'X', 'O', or '_'
 
 public:
 	Entity(std::string texture);

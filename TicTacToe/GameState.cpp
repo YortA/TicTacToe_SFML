@@ -8,6 +8,7 @@
 #include "AI.h"
 #include "Sound.h"
 #include "UI.h"
+
 #include "SFML/Window/Mouse.hpp"
 
 // C++ / Windows includes
@@ -42,7 +43,7 @@ void Game::create(const char* id, int width, int height, bool fullscreen)
 	statemanager = new StateManager(GAME_STATE::PLAYER);				// we could use our default, but for now we'll be implicit
 	inputmanager = new InputManager;									// user functions
 	ai = new AI;
-	ui = new UI;
+	/*ui = new UI;*/
 
 	window->getWindow()->setFramerateLimit(60);
 	createEntities();													// initialize all of our game objects
@@ -61,6 +62,9 @@ void Game::createEntities()
 
 	// Sound Entitys
 	soundPop1 = new Sound("Sounds/pop_1.wav");
+	soundWinner = new Sound("Sounds/winner_pop_1.wav");
+	musicbg = new Sound("Sounds/game_music.wav", 25.f);
+	musicbg->playMusic();
 
 	// create our marker entities for placement x and o placements
 	for (int i = 0; i < 3; i++)
@@ -84,8 +88,8 @@ void Game::createEntities()
 		}
 	}
 
-	font = ui->createFont("Graphics/ChessType.ttf");
-	MessageBoxA = ui->createMenuBox(font, 50, 50, 0, 0, "Text");
+	/*font = ui->createFont("Graphics/ChessType.ttf");
+	MessageBoxA = ui->createMenuBox(font, 50, 50, 0, 0, "Text");*/
 
 }
 
@@ -105,6 +109,7 @@ void Game::destroy()
 
 	// delete sound entities
 	delete soundPop1;
+	delete musicbg;
 
 	for (int i = 0; i < 3; i++)
 	{
@@ -123,6 +128,7 @@ void Game::update()
 	updateEvent();
 	updateInput();		// player input
 	updateAI();			// ai input
+	updateWinner();
 }
 
 void Game::render()
@@ -142,7 +148,11 @@ void Game::updateInput()
 		{
 			for (int j = 0; j < 3; j++)
 			{
-				inputmanager->update(markerVec[i][j], statemanager, window);
+				// Check to make sure our cell is empty before allowing a click
+				if (markerVec[i][j]->getId() == '_')
+				{
+					inputmanager->update(markerVec[i][j], statemanager, window);
+				}
 			}
 		}
 	}
@@ -177,7 +187,22 @@ bool Game::GameEnd()
 		return true;
 	}
 	else
+	{
 		return false;
+	}
+}
+
+// makes winner sound based on if bool gameend returns true
+void Game::updateWinner()
+{
+	if (GameEnd())
+	{
+		if (boolgameEndSound)
+		{
+			boolgameEndSound = false;
+			soundWinner->play();
+		}
+	}
 }
 
 // Update our deltatime -- we will (maybe) use this to track time in-game
@@ -207,7 +232,7 @@ void Game::draw()
 	window->draw(*gridbg->getRect());
 
 
-	window->draw(*MessageBoxA);
+	/*window->draw(*MessageBoxA);*/
 
 
 

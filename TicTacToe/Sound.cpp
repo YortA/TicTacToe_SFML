@@ -11,6 +11,11 @@ Sound::Sound(std::string soundFile)
 	create(soundFile);
 }
 
+Sound::Sound(std::string musicFile, float volume)
+{
+	create(musicFile, volume);
+}
+
 Sound::~Sound()
 {
 	destroy();
@@ -20,6 +25,7 @@ void Sound::destroy()
 {
 	delete buffer;		// do we even need to delete this? everything inside will be deleted
 	delete sound;
+	delete music;
 }
 
 void Sound::create(std::string soundFile)
@@ -35,7 +41,26 @@ void Sound::create(std::string soundFile)
 	}
 }
 
+// Our music create fn
+void Sound::create(std::string musicFile, float volume)
+{
+	music = new sf::Music;
+	music->setVolume(volume);
+	music->setLoop(true);
+
+	if (!music->openFromFile(musicFile))
+	{
+		std::cout << "FILE: (" << musicFile << ") FAILED TO LOAD!" << std::endl;
+	}
+}
+
+// Can we pass sf::music or sf::sound?
 void Sound::play()
 {
 	sound->play();
+}
+
+void Sound::playMusic()
+{
+	music->play();
 }
