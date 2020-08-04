@@ -5,7 +5,7 @@
 // Refernces for setting up SFML Game Development by Example (eBook)
 // SFML: https://www.sfml-dev.org/documentation/2.5.1/index.php
 
-#include "GameState.h"
+#include "Game.h"
 
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600

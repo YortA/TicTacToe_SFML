@@ -3,6 +3,7 @@
 #include "Entity.h"
 #include "Window.h"
 #include "SFML/Window/Mouse.hpp"			// for sfml mouse functionality
+#include "SFML/Window/Keyboard.hpp"	
 #include "Sound.h"
 
 #include "MYDEBUGHELPER.h"
@@ -20,8 +21,42 @@ InputManager::~InputManager()
 // Check if our mouse is hovering over an entity (no_marker) and if it is, allow a click
 void InputManager::update(Entity* entity, StateManager* statemanager, Window* window)
 {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+    {
+        window->getWindow()->close();
+    }
+
+    if ((sf::Mouse::isButtonPressed(sf::Mouse::Left)) && *statemanager->uiState == UI_STATE::TITLE)
+    {
+        if ((sf::Mouse::getPosition(*window->getWindow()).x > entity->getLeft()) &&
+            (sf::Mouse::getPosition(*window->getWindow()).x < entity->getWidth()) &&
+            (sf::Mouse::getPosition(*window->getWindow()).y > entity->getTop()) &&
+            (sf::Mouse::getPosition(*window->getWindow()).y < entity->getHeight()))
+        {
+            *statemanager->uiState = UI_STATE::MAIN;
+        }
+    }
+
+    else if ((sf::Mouse::isButtonPressed(sf::Mouse::Left)) && *statemanager->uiState == UI_STATE::MAIN)
+    {
+        if ((sf::Mouse::getPosition(*window->getWindow()).x > entity->getLeft()) &&
+            (sf::Mouse::getPosition(*window->getWindow()).x < entity->getWidth()) &&
+            (sf::Mouse::getPosition(*window->getWindow()).y > entity->getTop()) &&
+            (sf::Mouse::getPosition(*window->getWindow()).y < entity->getHeight()))
+        {
+            if (entity->getId() == 'R')
+            {
+                // will do soon (restart board)
+            }
+            else if (entity->getId() == 'Q')
+            {
+                *statemanager->uiState = UI_STATE::TITLE;       // returns to title screen
+            }
+        }
+    }
+
     // if our mouse is pressed, and it's the player's turn:
-    if ((sf::Mouse::isButtonPressed(sf::Mouse::Left)) && (*statemanager->gameState == GAME_STATE::PLAYER))
+    else if ((sf::Mouse::isButtonPressed(sf::Mouse::Left)) && (*statemanager->gameState == GAME_STATE::PLAYER))
     {
         // if the mouse is inside of the entity position
         if ((sf::Mouse::getPosition(*window->getWindow()).x > entity->getLeft()) &&

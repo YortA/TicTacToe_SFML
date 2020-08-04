@@ -1,4 +1,36 @@
-﻿  GameState.cpp
-C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\GameState.cpp(104,11): warning C4150: deletion of pointer to incomplete type 'UI'; no destructor called
-C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\GameState.h(19): message : see declaration of 'UI'
-  TicTacToe.vcxproj -> C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\Debug\TicTacToe.exe
+﻿  Game.cpp
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Game.cpp(60,93): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Game.cpp(60,72): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Game.cpp(86,90): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Game.cpp(86,65): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Game.cpp(88,127): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Game.cpp(88,51): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Game.cpp(90,93): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Game.cpp(90,68): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Game.cpp(95,90): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Game.cpp(95,65): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Game.cpp(164,2): error C2181: illegal else without matching if

@@ -1,18 +1,27 @@
-//#pragma once
-//#include "SFML/Graphics/RectangleShape.hpp"
-//#include "SFML/Graphics/Font.hpp"
-//
-//class UI
-//{
-//private:
-//
-//
-//public:
-//	UI();
-//	~UI();
-//
-//	sf::RectangleShape* createMenuBox(sf::Font* font, int width, int height, int posx, int posy, const char* message);
-//	sf::Font* createFont(const char* fileLocation);
-//
-//
-//};
+#pragma once
+#include "SFML/Graphics/RectangleShape.hpp"
+#include "SFML/Graphics/Font.hpp"
+
+class UI
+{
+private:
+	// our button objs
+	class Entity
+		* playButton = nullptr,
+		* restartButton = nullptr,
+		* quitButton = nullptr;
+
+	
+public:
+	UI();
+	~UI();
+
+	void create();
+	void destroy();
+
+	class Entity
+		* createPlayButton(),
+		* createRestartButton(),
+		* createQuitButton();
+
+};

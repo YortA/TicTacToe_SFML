@@ -9,3 +9,10 @@ enum class GAME_STATE
 	AI,
 	GAMEOVER
 };
+
+enum class UI_STATE
+{
+	TITLE,			// main menu
+	MAIN,			// main game loop
+	QUIT			// exits
+};
