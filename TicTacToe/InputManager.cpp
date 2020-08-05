@@ -26,29 +26,23 @@ void InputManager::update(Entity* entity, StateManager* statemanager, Window* wi
         window->getWindow()->close();
     }
 
-    if ((sf::Mouse::isButtonPressed(sf::Mouse::Left)) && *statemanager->uiState == UI_STATE::TITLE)
+    if (*statemanager->uiState == UI_STATE::TITLE)
     {
-        if ((sf::Mouse::getPosition(*window->getWindow()).x > entity->getLeft()) &&
-            (sf::Mouse::getPosition(*window->getWindow()).x < entity->getWidth()) &&
-            (sf::Mouse::getPosition(*window->getWindow()).y > entity->getTop()) &&
-            (sf::Mouse::getPosition(*window->getWindow()).y < entity->getHeight()))
+        if (clickedOnEntity(entity, window))
         {
             *statemanager->uiState = UI_STATE::MAIN;
         }
     }
 
-    else if ((sf::Mouse::isButtonPressed(sf::Mouse::Left)) && *statemanager->uiState == UI_STATE::MAIN)
+    else if (*statemanager->uiState == UI_STATE::MAIN)
     {
-        if ((sf::Mouse::getPosition(*window->getWindow()).x > entity->getLeft()) &&
-            (sf::Mouse::getPosition(*window->getWindow()).x < entity->getWidth()) &&
-            (sf::Mouse::getPosition(*window->getWindow()).y > entity->getTop()) &&
-            (sf::Mouse::getPosition(*window->getWindow()).y < entity->getHeight()))
+        if (clickedOnEntity(entity, window))
         {
-            if (entity->getId() == 'R')
+            if (entity->getMenuID() == 'R')
             {
                 // will do soon (restart board)
             }
-            else if (entity->getId() == 'Q')
+            else if (entity->getMenuID() == 'Q')
             {
                 *statemanager->uiState = UI_STATE::TITLE;       // returns to title screen
             }
@@ -56,7 +50,7 @@ void InputManager::update(Entity* entity, StateManager* statemanager, Window* wi
     }
 
     // if our mouse is pressed, and it's the player's turn:
-    else if ((sf::Mouse::isButtonPressed(sf::Mouse::Left)) && (*statemanager->gameState == GAME_STATE::PLAYER))
+    if ((sf::Mouse::isButtonPressed(sf::Mouse::Left)) && (*statemanager->gameState == GAME_STATE::PLAYER))
     {
         // if the mouse is inside of the entity position
         if ((sf::Mouse::getPosition(*window->getWindow()).x > entity->getLeft()) &&
@@ -64,15 +58,28 @@ void InputManager::update(Entity* entity, StateManager* statemanager, Window* wi
             (sf::Mouse::getPosition(*window->getWindow()).y > entity->getTop()) &&
             (sf::Mouse::getPosition(*window->getWindow()).y < entity->getHeight()))
         {
-            if (entity->getOpacity() < 255);
+            if ((entity->getOpacity() < 255) && (*statemanager->uiState == UI_STATE::MAIN))
             {
                 debugger->my_debug_timer("InputManager() function called.");    // timestamps for console
                 soundPop2->play();
                 entity->setOpacity(255);
                 entity->setId('X');                                             // set our player marker
+                std::cout << entity->getId() << std::endl;
                 *statemanager->gameState = GAME_STATE::AI;                      // gamestate back to AI
             }
         }
+    }
+}
+
+bool InputManager::clickedOnEntity(Entity* entity, Window* window)
+{
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left) &&
+        (sf::Mouse::getPosition(*window->getWindow()).x > entity->getLeft()) &&
+        (sf::Mouse::getPosition(*window->getWindow()).x < entity->getWidth()) &&
+        (sf::Mouse::getPosition(*window->getWindow()).y > entity->getTop()) &&
+        (sf::Mouse::getPosition(*window->getWindow()).y < entity->getHeight()))
+    {
+        return true;
     }
 }
 

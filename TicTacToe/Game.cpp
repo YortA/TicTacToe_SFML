@@ -90,12 +90,12 @@ void Game::setup()
 	restartButton->getRect()->setSize(sf::Vector2f(window->getWidth() / 9, window->getHeight() / 9));
 	restartButton->setOrigin(0.0f, 0.0f);
 	restartButton->setPosition(playButton->getPosition().x - restartButton->getWidth() - 20, playButton->getPosition().y);
-	restartButton->setId('R');
+	restartButton->setmenuID('R');
 
 	quitButton->getRect()->setSize(sf::Vector2f(window->getWidth() / 9, window->getHeight() / 9));
 	quitButton->setOrigin(0.0f, 0.0f);
 	quitButton->setPosition(playButton->getPosition().x + quitButton->getWidth() + 20, playButton->getPosition().y);
-	quitButton->setId('Q');
+	quitButton->setmenuID('Q');
 }
 
 void Game::destroy()
@@ -152,16 +152,19 @@ void Game::render()
 // Allows us to call our update functionality for mouse clicks on screen
 void Game::updateInput()
 {
-
+	
 
 	if (*statemanager->uiState == UI_STATE::TITLE)
 	{
 		inputmanager->update(playButton, statemanager, window);
+	}
+	else if (*statemanager->uiState == UI_STATE::MAIN)
+	{
 		inputmanager->update(restartButton, statemanager, window);
 		inputmanager->update(quitButton, statemanager, window);
 	}
 
-	else if (inputmanager->DidMouseTrigger() && !GameEnd() && *statemanager->uiState == UI_STATE::MAIN)
+	if (inputmanager->DidMouseTrigger() && !GameEnd() && *statemanager->uiState == UI_STATE::MAIN)
 	{
 		// Iterate through all of the cells
 		for (int i = 0; i < 3; i++)
@@ -176,12 +179,6 @@ void Game::updateInput()
 			}
 		}
 	}
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::F5))
-	{
-		*statemanager->uiState = UI_STATE::MAIN;
-	}
-
 }
 
 void Game::updateAI()

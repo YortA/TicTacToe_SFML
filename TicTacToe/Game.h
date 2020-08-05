@@ -55,7 +55,7 @@ private:
 	std::vector<std::vector<Entity*>> markerVec;	// MD vector hurrr
 	bool GameEnd();
 	bool boolgameEndSound = true;						// play our "winner" sound
-
+	bool isRestarting = false;
 
 
 	// Gets our turn timer

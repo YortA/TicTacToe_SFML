@@ -16,6 +16,7 @@ private:
 	sf::Vector2i* gridPosition = nullptr;
 
 	char id = '_';			// 'X', 'O', or '_'
+	char menuID;
 
 public:
 	Entity(std::string texture);
@@ -35,6 +36,7 @@ public:
 	unsigned int getTop();
 	unsigned int getHeight();
 	char getId();
+	char getMenuID();
 
 
 	// Non-SFML getters
@@ -48,5 +50,6 @@ public:
 	void setOpacity(float x);
 	void setGridPosition(int x, int y);
 	void setId(char id);
+	void setmenuID(char menuid);
 
 };

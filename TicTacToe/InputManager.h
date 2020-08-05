@@ -15,4 +15,5 @@ public:
 	bool DidMouseTrigger();
 	// user input functionality
 	void update(class Entity* entity, class StateManager* statemanager, class Window* window);
+	bool clickedOnEntity(class Entity* entity, class Window* window);
 };

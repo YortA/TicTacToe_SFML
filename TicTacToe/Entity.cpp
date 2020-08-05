@@ -114,6 +114,11 @@ char Entity::getId()
 	return id;
 }
 
+char Entity::getMenuID()
+{
+	return menuID;
+}
+
 // Setters
 void Entity::setTexture(sf::Texture* texture)
 {
@@ -155,3 +160,9 @@ void Entity::setId(char id)
 {
 	this->id = id;
 }
+
+void Entity::setmenuID(char menuid)
+{
+	this->menuID = menuid;
+}
+
