@@ -55,11 +55,12 @@ private:
 	std::vector<std::vector<Entity*>> markerVec;	// MD vector hurrr
 	bool GameEnd();
 	bool boolgameEndSound = true;						// play our "winner" sound
-	bool isRestarting = false;
-
 
 	// Gets our turn timer
 	float turntimer = 0;
+	int wins = 0;
+	int losses = 0;
+
 
 public:
 	// Constructor/Destructors
@@ -68,6 +69,7 @@ public:
 	~Game();
 
 	void create(const char* id, int width, int height, bool fullscreen);
+	void reset();
 	void setup();
 	void destroy();
 
@@ -78,5 +80,4 @@ public:
 
 	// Entity creator function
 	void createMarkerGrid();
-
 };

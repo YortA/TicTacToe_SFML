@@ -90,7 +90,7 @@ void Game::setup()
 	restartButton->getRect()->setSize(sf::Vector2f(window->getWidth() / 9, window->getHeight() / 9));
 	restartButton->setOrigin(0.0f, 0.0f);
 	restartButton->setPosition(playButton->getPosition().x - restartButton->getWidth() - 20, playButton->getPosition().y);
-	restartButton->setmenuID('R');
+	restartButton->setmenuID('R');			// unnecessary now?
 
 	quitButton->getRect()->setSize(sf::Vector2f(window->getWidth() / 9, window->getHeight() / 9));
 	quitButton->setOrigin(0.0f, 0.0f);
@@ -98,30 +98,29 @@ void Game::setup()
 	quitButton->setmenuID('Q');
 }
 
+// Reset our gameboard
+void Game::reset()
+{
+	*statemanager->gameState = GAME_STATE::PLAYER;
+
+	wins = 0;
+	losses = 0;
+
+	// reset entities id to null
+	for (int i = 0; i < 3; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			// Check to make sure our cell is empty before allowing a click
+			markerVec[i][j]->setOpacity(0.f);
+			markerVec[i][j]->setId('_');
+		}
+	}
+}
+
 void Game::destroy()
 {
-	// delete game engine
-	delete window;
-	delete deltatime;
-	delete statemanager;
-	delete inputmanager;
-	delete ai;
-	delete ui;
-
-	// delete game entities
-	delete background;
-	delete gridbg;
-
-	// delete sound entities
-	delete soundPop1;
-	delete musicbg;
-
-	// delete ui entities
-	delete titleScreen;
-	delete playButton;
-	delete restartButton;
-	delete quitButton;
-
+	// delete our gridmarkers
 	for (int i = 0; i < 3; i++)
 	{
 		for (int j = 0; j < 3; j++)
@@ -129,6 +128,28 @@ void Game::destroy()
 			delete markerVec[i][j];
 		}
 	}
+
+	// delete ui entities
+	delete titleScreen;
+	delete playButton;
+	delete restartButton;
+	delete quitButton;
+
+	// delete sound entities
+	delete soundPop1;
+	delete musicbg;
+
+	// delete game entities
+	delete background;
+	delete gridbg;
+
+	// delete game engine
+	delete ai;
+	delete ui;
+	delete inputmanager;
+	delete statemanager;
+	delete deltatime;
+	delete window;
 }
 
 
@@ -152,16 +173,24 @@ void Game::render()
 // Allows us to call our update functionality for mouse clicks on screen
 void Game::updateInput()
 {
-	
-
 	if (*statemanager->uiState == UI_STATE::TITLE)
 	{
 		inputmanager->update(playButton, statemanager, window);
 	}
 	else if (*statemanager->uiState == UI_STATE::MAIN)
 	{
-		inputmanager->update(restartButton, statemanager, window);
-		inputmanager->update(quitButton, statemanager, window);
+		if (inputmanager->clickedOnEntity(restartButton, window))
+		{
+			//inputmanager->update(restartButton, statemanager, window);
+			*statemanager->uiState = UI_STATE::MAIN;
+			reset();
+		}
+		if (inputmanager->clickedOnEntity(quitButton, window))
+		{
+			//inputmanager->update(quitButton, statemanager, window);
+			*statemanager->uiState = UI_STATE::TITLE;
+			reset();
+		}
 	}
 
 	if (inputmanager->DidMouseTrigger() && !GameEnd() && *statemanager->uiState == UI_STATE::MAIN)

@@ -31,5 +31,6 @@ public:
 	// our event handler for inputs
 	void handleEvent();
 
+	// Our public get window member for entities
 	sf::RenderWindow* getWindow();
 };

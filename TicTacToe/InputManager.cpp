@@ -34,29 +34,26 @@ void InputManager::update(Entity* entity, StateManager* statemanager, Window* wi
         }
     }
 
-    else if (*statemanager->uiState == UI_STATE::MAIN)
-    {
-        if (clickedOnEntity(entity, window))
-        {
-            if (entity->getMenuID() == 'R')
-            {
-                // will do soon (restart board)
-            }
-            else if (entity->getMenuID() == 'Q')
-            {
-                *statemanager->uiState = UI_STATE::TITLE;       // returns to title screen
-            }
-        }
-    }
+    //else if (*statemanager->uiState == UI_STATE::MAIN)
+    //{
+    //    if (clickedOnEntity(entity, window))
+    //    {
+    //        if (entity->getMenuID() == charRestart)
+    //        {
+    //            //window->setIsRestarting(true);
+    //        }
+    //        else if (entity->getMenuID() == charQuit)
+    //        {
+    //            *statemanager->uiState = UI_STATE::TITLE;       // returns to title screen
+    //        }
+    //    }
+    //}
 
     // if our mouse is pressed, and it's the player's turn:
-    if ((sf::Mouse::isButtonPressed(sf::Mouse::Left)) && (*statemanager->gameState == GAME_STATE::PLAYER))
+    if ((*statemanager->gameState == GAME_STATE::PLAYER))
     {
         // if the mouse is inside of the entity position
-        if ((sf::Mouse::getPosition(*window->getWindow()).x > entity->getLeft()) &&
-            (sf::Mouse::getPosition(*window->getWindow()).x < entity->getWidth()) &&
-            (sf::Mouse::getPosition(*window->getWindow()).y > entity->getTop()) &&
-            (sf::Mouse::getPosition(*window->getWindow()).y < entity->getHeight()))
+        if (clickedOnEntity(entity, window))
         {
             if ((entity->getOpacity() < 255) && (*statemanager->uiState == UI_STATE::MAIN))
             {
@@ -71,6 +68,7 @@ void InputManager::update(Entity* entity, StateManager* statemanager, Window* wi
     }
 }
 
+// Our logic check to see if our mouse position is inside of our game window and entity rect
 bool InputManager::clickedOnEntity(Entity* entity, Window* window)
 {
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left) &&
@@ -80,6 +78,10 @@ bool InputManager::clickedOnEntity(Entity* entity, Window* window)
         (sf::Mouse::getPosition(*window->getWindow()).y < entity->getHeight()))
     {
         return true;
+    }
+    else
+    {
+        return false;
     }
 }
 

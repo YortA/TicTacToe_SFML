@@ -33,15 +33,4 @@ C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Game.cpp
           [
               T=float
           ]
-  InputManager.cpp
-C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\InputManager.cpp(56,61): warning C4018: '>': signed/unsigned mismatch
-C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\InputManager.cpp(57,61): warning C4018: '<': signed/unsigned mismatch
-C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\InputManager.cpp(58,61): warning C4018: '>': signed/unsigned mismatch
-C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\InputManager.cpp(59,61): warning C4018: '<': signed/unsigned mismatch
-C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\InputManager.cpp(77,57): warning C4018: '>': signed/unsigned mismatch
-C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\InputManager.cpp(78,57): warning C4018: '<': signed/unsigned mismatch
-C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\InputManager.cpp(79,57): warning C4018: '>': signed/unsigned mismatch
-C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\InputManager.cpp(80,57): warning C4018: '<': signed/unsigned mismatch
-  Generating Code...
-C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\InputManager.cpp(84): warning C4715: 'InputManager::clickedOnEntity': not all control paths return a value
   TicTacToe.vcxproj -> C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\Debug\TicTacToe.exe

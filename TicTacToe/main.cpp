@@ -10,8 +10,6 @@
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
 
-void restartGame(Game* game);
-
 int main()
 {
 	Game* TicTacToe = new Game { "TicTacToe - A (not so) Fun Game!", SCREEN_WIDTH, SCREEN_HEIGHT, false };
@@ -20,14 +18,7 @@ int main()
 	{
 		TicTacToe->update();
 		TicTacToe->render();
-
-		//if (sf::Keyboard::isKeyPressed())
 	}
-}
-
-void restartgame(Game* game)
-{
-	Game* newGame = new Game{ "TicTacToe - A (not so) Fun Game!", SCREEN_WIDTH, SCREEN_HEIGHT, false };
 }
 
 

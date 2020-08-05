@@ -8,6 +8,9 @@ private:
 
 	class Sound* soundPop2 = nullptr;
 
+	char charRestart = 'R';
+	char charQuit = 'Q';
+
 public:
 	InputManager();
 	~InputManager();
