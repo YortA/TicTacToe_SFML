@@ -5,9 +5,9 @@ class AI
 {
 private:
 	// Game markers (no magic values allowed!)
-	char humanMarker = 'X';
-	char aiMarker = 'O';
-	char emptyMarker = '_';
+	const char humanMarker = 'X';
+	const char aiMarker = 'O';
+	const char emptyMarker = '_';
 
 	class myDebugger* debugger = nullptr;
 

@@ -103,19 +103,32 @@ void Game::reset()
 {
 	*statemanager->gameState = GAME_STATE::PLAYER;
 
+	std::cout << "Wins: " << wins << std::endl;
+	std::cout << "Losses: " << losses << std::endl;
+
 	wins = 0;
 	losses = 0;
+	boolgameEndSound = true;		// ready our win sound
 
-	// reset entities id to null
+	// reset entities id & markers to null
+	resetOtoX();
+}
+
+// Check to make sure our cell is reset before allowing a click
+void Game::resetOtoX()
+{
 	for (int i = 0; i < 3; i++)
 	{
 		for (int j = 0; j < 3; j++)
 		{
-			// Check to make sure our cell is empty before allowing a click
+			sf::Vector2u textureSize = markerVec[i][j]->getTexture()->getSize();
+			textureSize.x /= 2;			// cut our spritesheet in half
+			markerVec[i][j]->getRect()->setTextureRect(sf::IntRect(0, 0, textureSize.x, textureSize.y));	// set origin to 0,0 of the sprite sheet (top left)
 			markerVec[i][j]->setOpacity(0.f);
 			markerVec[i][j]->setId('_');
 		}
 	}
+
 }
 
 void Game::destroy()
@@ -253,6 +266,44 @@ void Game::updateWinner()
 		{
 			boolgameEndSound = false;
 			soundWinner->play();
+		}
+		if (ai->checkWin_Game(AI::PLAYER::USER, markerVec))
+		{
+			// text for player wins
+			*statemanager->gameState = GAME_STATE::AI;
+			boolgameEndSound = true;
+			resetOtoX();
+			++wins;
+		}
+		else if (ai->checkWin_Game(AI::PLAYER::COMPUTER, markerVec))
+		{
+			// text for ai wins, tells player they start
+			*statemanager->gameState = GAME_STATE::PLAYER;
+			boolgameEndSound = true;
+			resetOtoX();
+			++losses;
+		}
+	}
+	// check for a draw
+	else
+	{
+		int fullsquares = 0;
+		for (int i = 0; i < 3; i++)
+		{
+			for (int j = 0; j < 3; j++)
+			{
+				// Check to make sure our cell is empty before allowing a click
+				if (markerVec[i][j]->getId() != '_')
+				{
+					++fullsquares;
+				}
+			}
+		}
+		// looks like a draw!
+		if (fullsquares == 9)
+		{
+			boolgameEndSound = true;
+			resetOtoX();
 		}
 	}
 }

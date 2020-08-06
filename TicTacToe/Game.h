@@ -70,6 +70,7 @@ public:
 
 	void create(const char* id, int width, int height, bool fullscreen);
 	void reset();
+	void resetOtoX();
 	void setup();
 	void destroy();
 

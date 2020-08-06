@@ -1,6 +1,7 @@
 #pragma once
 #include "SFML/Graphics/RectangleShape.hpp"
 #include "SFML/Graphics/Font.hpp"
+#include "SFML/Graphics/Text.hpp"
 
 class UI
 {
@@ -11,7 +12,9 @@ private:
 		* restartButton = nullptr,
 		* quitButton = nullptr;
 
-	
+	//sf::Font* font = nullptr;
+	//sf::Text* text = nullptr;
+
 public:
 	UI();
 	~UI();
@@ -23,5 +26,7 @@ public:
 		* createPlayButton(),
 		* createRestartButton(),
 		* createQuitButton();
+
+	void createText(int score);
 
 };

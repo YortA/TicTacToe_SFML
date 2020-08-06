@@ -11,6 +11,8 @@ private:
 	char charRestart = 'R';
 	char charQuit = 'Q';
 
+	const char xMarker = 'X';
+
 public:
 	InputManager();
 	~InputManager();

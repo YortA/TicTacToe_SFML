@@ -55,12 +55,12 @@ void InputManager::update(Entity* entity, StateManager* statemanager, Window* wi
         // if the mouse is inside of the entity position
         if (clickedOnEntity(entity, window))
         {
-            if ((entity->getOpacity() < 255) && (*statemanager->uiState == UI_STATE::MAIN))
+            if ((entity->getOpacity() < 255) && (*statemanager->uiState == UI_STATE::MAIN)) // --- do we really need to check the state twice (see updateinput)
             {
                 debugger->my_debug_timer("InputManager() function called.");    // timestamps for console
                 soundPop2->play();
                 entity->setOpacity(255);
-                entity->setId('X');                                             // set our player marker
+                entity->setId(xMarker);                                             // set our player marker
                 std::cout << entity->getId() << std::endl;
                 *statemanager->gameState = GAME_STATE::AI;                      // gamestate back to AI
             }
