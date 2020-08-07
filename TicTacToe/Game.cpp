@@ -56,6 +56,13 @@ void Game::create(const char* id, int width, int height, bool fullscreen)
 	soundWinner = new Sound("Sounds/winner_pop_1.wav");
 	musicbg = new Sound("Sounds/game_music.wav", 25.f);
 
+	// Text
+	winText = new sf::Text;
+	lossText = new sf::Text;
+	winPopText = new sf::Text;
+	lossPopText = new sf::Text;
+	drawPopText = new sf::Text;
+
 	// UI Entities
 	titleScreen = new Entity("Graphics/title_screen.png", window->getWidth(), window->getHeight(), 1, 1);
 
@@ -90,12 +97,36 @@ void Game::setup()
 	restartButton->getRect()->setSize(sf::Vector2f(window->getWidth() / 9, window->getHeight() / 9));
 	restartButton->setOrigin(0.0f, 0.0f);
 	restartButton->setPosition(playButton->getPosition().x - restartButton->getWidth() - 20, playButton->getPosition().y);
-	restartButton->setmenuID('R');			// unnecessary now?
 
 	quitButton->getRect()->setSize(sf::Vector2f(window->getWidth() / 9, window->getHeight() / 9));
 	quitButton->setOrigin(0.0f, 0.0f);
 	quitButton->setPosition(playButton->getPosition().x + quitButton->getWidth() + 20, playButton->getPosition().y);
-	quitButton->setmenuID('Q');
+
+	// Text setup
+	ui->createScoreText("USER ", 0, winText);
+	winText->setFillColor(sf::Color::Blue);
+	winText->setOrigin(0.0f, 0.0f);
+	winText->setPosition(restartButton->getPosition().x - 45, restartButton->getPosition().y - 125.f);
+
+	ui->createScoreText("AI ", 0, lossText);
+	lossText->setFillColor(sf::Color::Red);
+	lossText->setOrigin(0.0f, 0.0f);
+	lossText->setPosition(quitButton->getPosition().x - 5, quitButton->getPosition().y - 125.f);
+
+	ui->createMsgText("WIN", winPopText);
+	winPopText->setFillColor(sf::Color::Color(0, 0, 255, 0));
+	winPopText->setOrigin(0.0f, 0.0f);
+	winPopText->setPosition(250, 50);
+
+	ui->createMsgText("LOSS", lossPopText);
+	lossPopText->setFillColor(sf::Color::Color(255, 0, 0, 0));
+	lossPopText->setOrigin(0.0f, 0.0f);
+	lossPopText->setPosition(190, 50);
+
+	ui->createMsgText("DRAW", drawPopText);
+	drawPopText->setFillColor(sf::Color::Color(240, 255, 0, 0));
+	drawPopText->setOrigin(0.0f, 0.0f);
+	drawPopText->setPosition(190, 50);
 }
 
 // Reset our gameboard
@@ -156,6 +187,13 @@ void Game::destroy()
 	delete background;
 	delete gridbg;
 
+	// delete text
+	delete winText;
+	delete winPopText;
+	delete lossText;
+	delete lossPopText;
+	delete drawPopText;
+
 	// delete game engine
 	delete ai;
 	delete ui;
@@ -171,6 +209,7 @@ void Game::update()
 {
 	updateDelta();
 	updateEvent();
+	updateGameTimer();
 	updateInput();		// player input
 	updateAI();			// ai input
 	updateWinner();
@@ -266,23 +305,33 @@ void Game::updateWinner()
 		{
 			boolgameEndSound = false;
 			soundWinner->play();
+			boolNewGameTimer = true;
 		}
-		if (ai->checkWin_Game(AI::PLAYER::USER, markerVec))
+
+		if (!boolNewGameTimer)
 		{
-			// text for player wins
-			*statemanager->gameState = GAME_STATE::AI;
-			boolgameEndSound = true;
-			resetOtoX();
-			++wins;
+			if (ai->checkWin_Game(AI::PLAYER::USER, markerVec))
+			{
+				// text for player wins
+				*statemanager->gameState = GAME_STATE::AI;
+				boolgameEndSound = true;
+				resetOtoX();
+				++wins;
+				winPopText->setFillColor(sf::Color::Color(0, 0, 255, 0));
+				winPopText->setOutlineThickness(0);
+			}
+			else if (ai->checkWin_Game(AI::PLAYER::COMPUTER, markerVec))
+			{
+				// text for ai wins, tells player they start
+				*statemanager->gameState = GAME_STATE::PLAYER;
+				boolgameEndSound = true;
+				resetOtoX();
+				++losses;
+				lossPopText->setFillColor(sf::Color::Color(255, 0, 0, 0));
+				lossPopText->setOutlineThickness(0);
+			}
 		}
-		else if (ai->checkWin_Game(AI::PLAYER::COMPUTER, markerVec))
-		{
-			// text for ai wins, tells player they start
-			*statemanager->gameState = GAME_STATE::PLAYER;
-			boolgameEndSound = true;
-			resetOtoX();
-			++losses;
-		}
+		
 	}
 	// check for a draw
 	else
@@ -302,11 +351,53 @@ void Game::updateWinner()
 		// looks like a draw!
 		if (fullsquares == 9)
 		{
-			boolgameEndSound = true;
-			resetOtoX();
+			// manual timer to fix outside of gameend loop
+			endgametimer += .1f;
+
+			drawPopText->setFillColor(sf::Color::Color(240, 255, 0, 255));
+			drawPopText->setOutlineThickness(20);
+			if (endgametimer >= 7.f)
+			{
+				boolgameEndSound = true;
+				endgametimer = 0.0f;
+				drawPopText->setFillColor(sf::Color::Color(240, 255, 0, 0));
+				drawPopText->setOutlineThickness(0);
+				resetOtoX();
+			}
+		}
+	}
+	
+	// Update our UI win/loss text
+	ui->createScoreText("USER ", wins, winText);
+	ui->createScoreText("AI ", losses, lossText);
+}
+
+bool Game::updateGameTimer()
+{
+	if (boolNewGameTimer)
+	{
+		endgametimer += .1f;
+
+		if (ai->checkWin_Game(AI::PLAYER::USER, markerVec))
+		{
+			winPopText->setFillColor(sf::Color::Color(0, 0, 255, 255));
+			winPopText->setOutlineThickness(20);
+		}
+		else if (ai->checkWin_Game(AI::PLAYER::COMPUTER, markerVec))
+		{
+			lossPopText->setFillColor(sf::Color::Color(255, 0, 0, 255));
+			lossPopText->setOutlineThickness(20);
+		}
+
+		if (endgametimer >= 7.f)
+		{
+			boolNewGameTimer = false;
+			endgametimer = 0.0f;
+			return true;
 		}
 	}
 }
+
 
 // Update our deltatime -- we will (maybe) use this to track time in-game
 void Game::updateDelta()
@@ -345,6 +436,10 @@ void Game::draw()
 		window->draw(*restartButton->getRect());
 		window->draw(*quitButton->getRect());
 
+		// Draw text
+		window->draw(*winText);
+		window->draw(*lossText);
+
 		// Grid
 		for (int i = 0; i < 3; i++)
 		{
@@ -353,6 +448,10 @@ void Game::draw()
 				window->draw(*markerVec[i][j]->getRect());
 			}
 		}
+
+		window->draw(*winPopText);
+		window->draw(*lossPopText);
+		window->draw(*drawPopText);
 	}
 }
 

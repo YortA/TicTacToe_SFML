@@ -34,21 +34,6 @@ void InputManager::update(Entity* entity, StateManager* statemanager, Window* wi
         }
     }
 
-    //else if (*statemanager->uiState == UI_STATE::MAIN)
-    //{
-    //    if (clickedOnEntity(entity, window))
-    //    {
-    //        if (entity->getMenuID() == charRestart)
-    //        {
-    //            //window->setIsRestarting(true);
-    //        }
-    //        else if (entity->getMenuID() == charQuit)
-    //        {
-    //            *statemanager->uiState = UI_STATE::TITLE;       // returns to title screen
-    //        }
-    //    }
-    //}
-
     // if our mouse is pressed, and it's the player's turn:
     if ((*statemanager->gameState == GAME_STATE::PLAYER))
     {

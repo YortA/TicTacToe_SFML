@@ -22,6 +22,6 @@ int main()
 }
 
 
-// BUG LIST
+// BUGS
 
-// we need to prevent changing states when clicking on an existing entity. this way the AI doesn't get an extra turn. (see gamestate.cpp)
+// Sometimes crashes because of (AI.CPP) AI::hasEmptySquare() fn

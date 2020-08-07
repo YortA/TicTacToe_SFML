@@ -1,36 +1,37 @@
 ﻿  Game.cpp
-C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Game.cpp(60,93): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
-C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Game.cpp(60,72): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
-C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Game.cpp(86,90): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Game.cpp(67,93): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Game.cpp(67,72): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Game.cpp(93,90): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Game.cpp(86,65): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Game.cpp(93,65): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Game.cpp(88,127): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
-C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Game.cpp(88,51): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
-C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Game.cpp(90,93): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Game.cpp(95,127): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Game.cpp(95,51): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Game.cpp(97,93): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Game.cpp(90,68): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Game.cpp(97,68): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Game.cpp(95,90): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Game.cpp(101,90): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Game.cpp(95,65): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Game.cpp(101,65): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
           with
           [
               T=float
           ]
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Game.cpp(400): warning C4715: 'Game::updateGameTimer': not all control paths return a value
   TicTacToe.vcxproj -> C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\Debug\TicTacToe.exe

@@ -12,8 +12,8 @@ private:
 		* restartButton = nullptr,
 		* quitButton = nullptr;
 
-	//sf::Font* font = nullptr;
-	//sf::Text* text = nullptr;
+	// our text objs
+	sf::Font* font = nullptr;
 
 public:
 	UI();
@@ -27,6 +27,9 @@ public:
 		* createRestartButton(),
 		* createQuitButton();
 
-	void createText(int score);
+	sf::Font* getFont();
 
+	void setFont(sf::Font& font);
+	void createScoreText(std::string str, int score, sf::Text* text);
+	void createMsgText(std::string str, sf::Text* text);
 };
