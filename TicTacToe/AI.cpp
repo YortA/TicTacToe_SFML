@@ -164,12 +164,11 @@ AI::Moves AI::minimax(std::vector<std::vector<Entity*>> markerVec)
 
 int AI::maxReturn(char copyMarkervec[3][3], int iteration)
 {
-	//if (gameOver(copyMarkervec)) return score(copyMarkervec);	// check to see if it's a winning placement and the returned score value
+	// check to see if it's a winning placement and the returned score value
 	if (gameOver(copyMarkervec))
 	{
 		int metric = score(copyMarkervec);
-		return metric + signFN(metric) * iteration;
-		//return score(copyMarkervec);
+		return metric + signFN(metric) * iteration;	// use our heruistic fn with our recursion to drastically change our # of methods
 	}
 
 	Moves duhbigmove;
@@ -228,6 +227,7 @@ int AI::minReturn(char copyMarkervec[3][3], int iteration)
 	return bestMove;
 }
 
+// our heuristic function for minimax
 int AI::signFN(int num)
 {
 	if (num == 0) return 0;

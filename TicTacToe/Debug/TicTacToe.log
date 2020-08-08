@@ -1,4 +1,27 @@
-﻿  Game.cpp
+﻿  AI.cpp
+  Entity.cpp
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Entity.cpp(94,31): warning C4244: 'return': conversion from 'T' to 'unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Entity.cpp(99,31): warning C4244: 'return': conversion from 'T' to 'unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Entity.cpp(104,31): warning C4244: 'return': conversion from 'T' to 'unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Entity.cpp(109,31): warning C4244: 'return': conversion from 'T' to 'unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Entity.cpp(148,3): warning C4244: 'argument': conversion from 'float' to 'sf::Uint8', possible loss of data
+  Game.cpp
 C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Game.cpp(67,93): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
 C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Game.cpp(67,72): warning C4244: 'argument': conversion from 'unsigned int' to 'float', possible loss of data
 C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Game.cpp(93,90): warning C4244: 'argument': conversion from 'unsigned int' to 'T', possible loss of data
@@ -33,5 +56,15 @@ C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Game.cpp
           [
               T=float
           ]
-C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Game.cpp(400): warning C4715: 'Game::updateGameTimer': not all control paths return a value
+  InputManager.cpp
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\InputManager.cpp(60,57): warning C4018: '>': signed/unsigned mismatch
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\InputManager.cpp(61,57): warning C4018: '<': signed/unsigned mismatch
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\InputManager.cpp(62,57): warning C4018: '>': signed/unsigned mismatch
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\InputManager.cpp(63,57): warning C4018: '<': signed/unsigned mismatch
+  Sound.cpp
+  StateManager.cpp
+  UI.cpp
+  main.cpp
+  Generating Code...
+C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\TicTacToe\Game.cpp(399): warning C4715: 'Game::updateGameTimer': not all control paths return a value
   TicTacToe.vcxproj -> C:\PROJECTS\VS Projects\School Related\SDEV24081_FP\TicTacToe\Debug\TicTacToe.exe

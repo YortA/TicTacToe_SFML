@@ -16,7 +16,7 @@ private:
 	sf::Vector2i* gridPosition = nullptr;
 
 	char id = '_';			// 'X', 'O', or '_'
-	char menuID;
+	char menuID;			// DEPRECATED (could be used later)
 
 public:
 	Entity(std::string texture);

@@ -21,7 +21,8 @@ public:
 
 	void create();
 	void destroy();
-
+	
+	// Buttons
 	class Entity
 		* createPlayButton(),
 		* createRestartButton(),

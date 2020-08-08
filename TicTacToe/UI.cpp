@@ -54,6 +54,7 @@ sf::Font* UI::getFont()
 	return font;
 }
 
+// Pass and set our font
 void UI::setFont(sf::Font& font)
 {
 	this->font = &font;
@@ -61,7 +62,7 @@ void UI::setFont(sf::Font& font)
 
 void UI::createScoreText(std::string str, int score, sf::Text* text)
 {
-	std::string outputtext = std::to_string(score);
+	std::string outputtext = std::to_string(score);		// convert int to string text
 
 	text->setFont(*font);
 	text->setCharacterSize(50);
@@ -84,4 +85,3 @@ void UI::createMsgText(std::string str, sf::Text* text)
 
 	text->setString(str);
 }
-

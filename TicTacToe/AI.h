@@ -41,7 +41,7 @@ public:
 	// returns win + score
 	bool gameOver(char copyMarkervec[3][3]);
 
-	// main algorithm -- see below for theory
+	// main algorithm recursion section -- see below for theory
 	Moves minimax(std::vector<std::vector<class Entity*>> markerVec);
 	int maxReturn(char copyMarkervec[3][3], int iteration);
 	int minReturn(char copyMarkervec[3][3], int iteration);
@@ -56,6 +56,6 @@ public:
 // MINIMAX ALGORITHM THEORY
 /*
 
-banana
+FULL WRITE-UP TO COME LATER
 
 */

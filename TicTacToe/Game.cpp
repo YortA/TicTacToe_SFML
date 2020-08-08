@@ -225,26 +225,25 @@ void Game::render()
 // Allows us to call our update functionality for mouse clicks on screen
 void Game::updateInput()
 {
-	if (*statemanager->uiState == UI_STATE::TITLE)
+	if (*statemanager->uiState == UI_STATE::TITLE)					// title screen
 	{
 		inputmanager->update(playButton, statemanager, window);
 	}
-	else if (*statemanager->uiState == UI_STATE::MAIN)
+	else if (*statemanager->uiState == UI_STATE::MAIN)				// if we're on main
 	{
-		if (inputmanager->clickedOnEntity(restartButton, window))
+		if (inputmanager->clickedOnEntity(restartButton, window))		// allow restart button click
 		{
-			//inputmanager->update(restartButton, statemanager, window);
 			*statemanager->uiState = UI_STATE::MAIN;
 			reset();
 		}
-		if (inputmanager->clickedOnEntity(quitButton, window))
+		if (inputmanager->clickedOnEntity(quitButton, window))			// allow quit button click
 		{
-			//inputmanager->update(quitButton, statemanager, window);
 			*statemanager->uiState = UI_STATE::TITLE;
 			reset();
 		}
 	}
 
+	// Play marker input
 	if (inputmanager->DidMouseTrigger() && !GameEnd() && *statemanager->uiState == UI_STATE::MAIN)
 	{
 		// Iterate through all of the cells
@@ -262,6 +261,7 @@ void Game::updateInput()
 	}
 }
 
+// All AI update functions
 void Game::updateAI()
 {
 	if (*statemanager->gameState == GAME_STATE::AI && !GameEnd())
@@ -284,7 +284,7 @@ void Game::updateAI()
 }
 
 // logical check to see if our USER or AI has won
-bool Game::GameEnd()
+bool Game::GameEnd()	
 {
 	if (ai->checkWin_Game(AI::PLAYER::COMPUTER, markerVec) || ai->checkWin_Game(AI::PLAYER::USER, markerVec))
 	{
@@ -301,16 +301,16 @@ void Game::updateWinner()
 {
 	if (GameEnd())
 	{
-		if (boolgameEndSound)
+		if (boolgameEndSound)			// play our game sound on win
 		{
 			boolgameEndSound = false;
 			soundWinner->play();
-			boolNewGameTimer = true;
+			boolNewGameTimer = true;	// we set our "new game" timer
 		}
 
-		if (!boolNewGameTimer)
+		if (!boolNewGameTimer)			// once the timer returns false, we allow the conditions
 		{
-			if (ai->checkWin_Game(AI::PLAYER::USER, markerVec))
+			if (ai->checkWin_Game(AI::PLAYER::USER, markerVec))		// player wins
 			{
 				// text for player wins
 				*statemanager->gameState = GAME_STATE::AI;
@@ -320,7 +320,7 @@ void Game::updateWinner()
 				winPopText->setFillColor(sf::Color::Color(0, 0, 255, 0));
 				winPopText->setOutlineThickness(0);
 			}
-			else if (ai->checkWin_Game(AI::PLAYER::COMPUTER, markerVec))
+			else if (ai->checkWin_Game(AI::PLAYER::COMPUTER, markerVec))		// ai wins
 			{
 				// text for ai wins, tells player they start
 				*statemanager->gameState = GAME_STATE::PLAYER;
@@ -351,7 +351,7 @@ void Game::updateWinner()
 		// looks like a draw!
 		if (fullsquares == 9)
 		{
-			// manual timer to fix outside of gameend loop
+			// manual timer to fix outside of gameEnd() loop
 			endgametimer += .1f;
 
 			drawPopText->setFillColor(sf::Color::Color(240, 255, 0, 255));
@@ -372,24 +372,24 @@ void Game::updateWinner()
 	ui->createScoreText("AI ", losses, lossText);
 }
 
+// Game timer for our "Winner/Loser"
 bool Game::updateGameTimer()
 {
 	if (boolNewGameTimer)
 	{
-		endgametimer += .1f;
-
-		if (ai->checkWin_Game(AI::PLAYER::USER, markerVec))
+		endgametimer += .1f;		// timer is updated with framerate SEE: window->getWindow()->setFramerateLimit(60);
+		if (ai->checkWin_Game(AI::PLAYER::USER, markerVec))		// display win text
 		{
 			winPopText->setFillColor(sf::Color::Color(0, 0, 255, 255));
 			winPopText->setOutlineThickness(20);
 		}
-		else if (ai->checkWin_Game(AI::PLAYER::COMPUTER, markerVec))
+		else if (ai->checkWin_Game(AI::PLAYER::COMPUTER, markerVec))		// display loss text
 		{
 			lossPopText->setFillColor(sf::Color::Color(255, 0, 0, 255));
 			lossPopText->setOutlineThickness(20);
 		}
 
-		if (endgametimer >= 7.f)
+		if (endgametimer >= 7.f)		// check for timer
 		{
 			boolNewGameTimer = false;
 			endgametimer = 0.0f;
@@ -449,6 +449,7 @@ void Game::draw()
 			}
 		}
 
+		// UI
 		window->draw(*winPopText);
 		window->draw(*lossPopText);
 		window->draw(*drawPopText);

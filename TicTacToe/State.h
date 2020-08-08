@@ -7,12 +7,12 @@ enum class GAME_STATE
 {
 	PLAYER,			// player == 0
 	AI,
-	GAMEOVER
+	GAMEOVER		// We're not using GAMEOVER currently.
 };
 
 enum class UI_STATE
 {
 	TITLE,			// main menu
 	MAIN,			// main game loop
-	QUIT			// exits
+	QUIT			// We're not using QUIT currently.
 };

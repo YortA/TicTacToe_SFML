@@ -23,7 +23,7 @@ Sound::~Sound()
 
 void Sound::destroy()
 {
-	delete buffer;		// do we even need to delete this? everything inside will be deleted
+	delete buffer;
 	delete sound;
 	delete music;
 }
